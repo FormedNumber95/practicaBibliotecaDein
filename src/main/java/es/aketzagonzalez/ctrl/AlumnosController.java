@@ -9,28 +9,28 @@ import javafx.scene.control.TextField;
 public class AlumnosController {
 
     @FXML
+    private Button btnAlumnos;
+
+    @FXML
     private Button btnAniadir;
+
+    @FXML
+    private Button btnDevoluciones;
+
+    @FXML
+    private Button btnInformes;
+
+    @FXML
+    private Button btnLibros;
 
     @FXML
     private Button btnModificar;
 
     @FXML
-    private Menu menAlumnos;
+    private Button btnPrestamos;
 
     @FXML
     private Menu menAyuda;
-
-    @FXML
-    private Menu menDevoluciones;
-
-    @FXML
-    private Menu menInformes;
-
-    @FXML
-    private Menu menLibros;
-
-    @FXML
-    private Menu menPrestamos;
 
     @FXML
     private TextField txtFiltro;
