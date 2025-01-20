@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aketzagonzalez.ctrl.PrestamosController">
+<VBox stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aketzagonzalez.ctrl.DevolucionesController">
    <children>
       <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -72,19 +72,13 @@
                   <TableColumn prefWidth="156.7999267578125" text="%label.dni_alumno" />
                   <TableColumn prefWidth="185.5999755859375" text="%label.cod_libro" />
                   <TableColumn prefWidth="254.4000244140625" text="%label.fecha_prestamo" />
-                  <TableColumn prefWidth="185.5999755859375" text="%label.fecha_devolver" />
                </columns>
             </TableView>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="700.0" spacing="30.0">
                <children>
-                  <Button fx:id="btnAniadir" mnemonicParsing="false" onAction="#aniadirPrestamo" text="%label.btnAniadir">
+                  <Button fx:id="btnDevolver" mnemonicParsing="false" onAction="#devolverLibro" text="%label.btnDevolver">
                      <tooltip>
-                        <Tooltip text="%label.ayudaAniadir" />
-                     </tooltip>
-                  </Button>
-                  <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#modificarPrestamo" text="%label.btnModificar">
-                     <tooltip>
-                        <Tooltip text="%label.ayudaModificar" />
+                        <Tooltip text="%label.ayudaDevolver" />
                      </tooltip>
                   </Button>
                </children>

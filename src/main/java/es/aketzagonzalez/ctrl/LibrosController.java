@@ -18,6 +18,9 @@ public class LibrosController {
     private Button btnDevoluciones;
 
     @FXML
+    private Button btnEliminar;
+
+    @FXML
     private Button btnInformes;
 
     @FXML
@@ -41,12 +44,17 @@ public class LibrosController {
     }
 
     @FXML
-    void aniadirAlumno(ActionEvent event) {
+    void aniadirLibro(ActionEvent event) {
 
     }
 
     @FXML
-    void modificarAlumno(ActionEvent event) {
+    void eliminarLibro(ActionEvent event) {
+
+    }
+
+    @FXML
+    void modificarLibro(ActionEvent event) {
 
     }
 

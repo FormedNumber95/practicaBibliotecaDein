@@ -6,25 +6,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TextField;
 
-public class PrestamosController {
+public class DevolucionesController {
 
     @FXML
     private Button btnAlumnos;
 
     @FXML
-    private Button btnAniadir;
+    private Button btnDevoluciones;
 
     @FXML
-    private Button btnDevoluciones;
+    private Button btnDevolver;
 
     @FXML
     private Button btnInformes;
 
     @FXML
     private Button btnLibros;
-
-    @FXML
-    private Button btnModificar;
 
     @FXML
     private Button btnPrestamos;
@@ -41,12 +38,7 @@ public class PrestamosController {
     }
 
     @FXML
-    void aniadirPrestamo(ActionEvent event) {
-
-    }
-
-    @FXML
-    void modificarPrestamo(ActionEvent event) {
+    void devolverLibro(ActionEvent event) {
 
     }
 

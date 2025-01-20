@@ -78,17 +78,17 @@
             </TableView>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="700.0" spacing="30.0">
                <children>
-                  <Button fx:id="btnAniadir" mnemonicParsing="false" onAction="#aniadirAlumno" text="%label.btnAniadir">
+                  <Button fx:id="btnAniadir" mnemonicParsing="false" onAction="#aniadirLibro" text="%label.btnAniadir">
                      <tooltip>
                         <Tooltip text="%label.ayudaAniadir" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#modificarAlumno" text="%label.btnModificar">
+                  <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#modificarLibro" text="%label.btnModificar">
                      <tooltip>
                         <Tooltip text="%label.ayudaModificar" />
                      </tooltip>
                   </Button>
-                  <Button mnemonicParsing="false" text="%label.btnEliminar">
+                  <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminarLibro" text="%label.btnEliminar">
                      <tooltip>
                         <Tooltip text="%label.ayudaEliminar" />
                      </tooltip>
