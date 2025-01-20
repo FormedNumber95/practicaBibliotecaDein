@@ -28,7 +28,7 @@ public class Lanzador extends Application {
         ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
         stage=s;
         stage.setResizable(false);
-        setRoot("devoluciones","ALUMNOS",bundle);
+        setRoot("alumnos","ALUMNOS",bundle);
         /*try {
 			ConexionBBDD db=new ConexionBBDD();
 			setRoot("alumnos","ALUMNOS",bundle);
