@@ -30,7 +30,7 @@ public class Lanzador extends Application {
         stage.setResizable(false);
         try {
 			ConexionBBDD db=new ConexionBBDD();
-			setRoot("alumnos","ALUMNOS",bundle);
+			setRoot("devolverPrestamo","ALUMNOS",bundle);
 		} catch (SQLException e) {
 			Alert al=new Alert(AlertType.ERROR);
 			al.setHeaderText(null);

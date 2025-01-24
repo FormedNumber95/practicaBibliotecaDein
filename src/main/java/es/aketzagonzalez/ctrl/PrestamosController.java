@@ -24,9 +24,6 @@ public class PrestamosController {
     private Button btnLibros;
 
     @FXML
-    private Button btnModificar;
-
-    @FXML
     private Button btnPrestamos;
 
     @FXML
@@ -42,11 +39,6 @@ public class PrestamosController {
 
     @FXML
     void aniadirPrestamo(ActionEvent event) {
-
-    }
-
-    @FXML
-    void modificarPrestamo(ActionEvent event) {
 
     }
 
