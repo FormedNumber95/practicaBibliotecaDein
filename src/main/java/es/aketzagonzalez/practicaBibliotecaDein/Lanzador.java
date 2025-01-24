@@ -30,7 +30,7 @@ public class Lanzador extends Application {
         stage.setResizable(false);
         try {
 			ConexionBBDD db=new ConexionBBDD();
-			setRoot("devolverPrestamo","ALUMNOS",bundle);
+			setRoot("alumnos","ALUMNOS",bundle);
 		} catch (SQLException e) {
 			Alert al=new Alert(AlertType.ERROR);
 			al.setHeaderText(null);
@@ -59,5 +59,9 @@ public class Lanzador extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
+    public static Stage getStage() {
+		return stage;
+	}
 
 }
