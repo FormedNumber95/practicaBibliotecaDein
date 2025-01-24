@@ -7,13 +7,32 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * The Class Navegador.
+ * @author Aketza
+ * @version 1.0
+ */
 public class Navegador {
+    
+    /** The stage. */
     private static Stage stage; // El Stage principal de la aplicación
 
+    /**
+     * Sets the stage.
+     *
+     * @param primaryStage the new stage
+     */
     public static void setStage(Stage primaryStage) {
         stage = primaryStage;
     }
 
+    /**
+     * Cargar vista con el fxml que se le dice.
+     *
+     * @author Aketza
+     * @param fxml the fxml
+     * @param bundle the bundle
+     */
     public static void cargarVista(String fxml, ResourceBundle bundle) {
         try {
             FXMLLoader loader = new FXMLLoader(Navegador.class.getResource("/fxml/"+fxml + ".fxml"), bundle);
