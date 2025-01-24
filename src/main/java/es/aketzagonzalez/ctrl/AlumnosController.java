@@ -6,6 +6,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import es.aketzagonzalez.db.ConexionBBDD;
+import es.aketzagonzalez.model.Navegador;
 import es.aketzagonzalez.practicaBibliotecaDein.Lanzador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,22 +80,7 @@ public class AlumnosController {
         String lang = connConfig.getProperty("language");
         Locale locale = new Locale.Builder().setLanguage(lang).build();
         ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
-        Node source = (Node) event.getSource();
-	    Stage stage = (Stage) source.getScene().getWindow();
-	    stage.close();
-        s=new Stage();
-    	Scene scene;
-    	try {
-			 FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/devoluciones.fxml"),bundle);
-			scene = new Scene(controlador.load());
-			s.setScene(scene);
-    	} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	s.setResizable(false);
-	     s.initOwner(Lanzador.getStage());
-	     s.initModality(javafx.stage.Modality.WINDOW_MODAL);
-	     s.showAndWait();
+        Navegador.cargarVista("devoluciones", bundle);
     }
 
     @FXML
@@ -103,22 +89,7 @@ public class AlumnosController {
         String lang = connConfig.getProperty("language");
         Locale locale = new Locale.Builder().setLanguage(lang).build();
         ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
-        Node source = (Node) event.getSource();
-	    Stage stage = (Stage) source.getScene().getWindow();
-	    stage.close();
-        s=new Stage();
-    	Scene scene;
-    	try {
-			 FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/informes.fxml"),bundle);
-			scene = new Scene(controlador.load());
-			s.setScene(scene);
-    	} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	s.setResizable(false);
-	     s.initOwner(Lanzador.getStage());
-	     s.initModality(javafx.stage.Modality.WINDOW_MODAL);
-	     s.showAndWait();
+        Navegador.cargarVista("informes", bundle);
     }
 
     @FXML
@@ -127,22 +98,7 @@ public class AlumnosController {
         String lang = connConfig.getProperty("language");
         Locale locale = new Locale.Builder().setLanguage(lang).build();
         ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
-        Node source = (Node) event.getSource();
-	    Stage stage = (Stage) source.getScene().getWindow();
-	    stage.close();
-        s=new Stage();
-    	Scene scene;
-    	try {
-			 FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/libros.fxml"),bundle);
-			scene = new Scene(controlador.load());
-			s.setScene(scene);
-    	} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	s.setResizable(false);
-	     s.initOwner(Lanzador.getStage());
-	     s.initModality(javafx.stage.Modality.WINDOW_MODAL);
-	     s.showAndWait();
+        Navegador.cargarVista("libros", bundle);
     }
 
     @FXML
@@ -151,22 +107,7 @@ public class AlumnosController {
         String lang = connConfig.getProperty("language");
         Locale locale = new Locale.Builder().setLanguage(lang).build();
         ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
-        Node source = (Node) event.getSource();
-	    Stage stage = (Stage) source.getScene().getWindow();
-	    stage.close();
-        s=new Stage();
-    	Scene scene;
-    	try {
-			 FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/prestamos.fxml"),bundle);
-			scene = new Scene(controlador.load());
-			s.setScene(scene);
-    	} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	s.setResizable(false);
-	     s.initOwner(Lanzador.getStage());
-	     s.initModality(javafx.stage.Modality.WINDOW_MODAL);
-	     s.showAndWait();
+        Navegador.cargarVista("prestamos", bundle);
     }
     
     /**
