@@ -82,11 +82,6 @@
                         <Tooltip text="%label.ayudaAniadir" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#modificarPrestamo" text="%label.btnModificar">
-                     <tooltip>
-                        <Tooltip text="%label.ayudaModificar" />
-                     </tooltip>
-                  </Button>
                </children>
             </HBox>
          </children>

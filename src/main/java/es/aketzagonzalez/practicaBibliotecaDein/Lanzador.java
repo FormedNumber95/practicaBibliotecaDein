@@ -28,16 +28,15 @@ public class Lanzador extends Application {
         ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
         stage=s;
         stage.setResizable(false);
-        setRoot("alumnos","ALUMNOS",bundle);
-        /*try {
+        try {
 			ConexionBBDD db=new ConexionBBDD();
-			setRoot("alumnos","ALUMNOS",bundle);
+			setRoot("devolverPrestamo","ALUMNOS",bundle);
 		} catch (SQLException e) {
 			Alert al=new Alert(AlertType.ERROR);
 			al.setHeaderText(null);
 			al.setContentText("Error en la coneion a la base de datos");
 			al.showAndWait();
-		}*/
+		}
     }
 
     static void setRoot(String fxml,ResourceBundle bundle) throws IOException {
