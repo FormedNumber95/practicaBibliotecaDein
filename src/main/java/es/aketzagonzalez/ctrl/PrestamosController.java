@@ -68,7 +68,7 @@ public class PrestamosController {
         String lang = connConfig.getProperty("language");
         Locale locale = new Locale.Builder().setLanguage(lang).build();
         ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
-        Navegador.cargarVista("prestamos", bundle);
+        Navegador.cargarVista("devoluciones", bundle);
     }
 
     @FXML
