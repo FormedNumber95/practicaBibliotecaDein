@@ -1,5 +1,11 @@
 package es.aketzagonzalez.ctrl;
 
+import java.util.Locale;
+import java.util.Properties;
+import java.util.ResourceBundle;
+
+import es.aketzagonzalez.db.ConexionBBDD;
+import es.aketzagonzalez.model.Navegador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -60,7 +66,11 @@ public class LibrosController {
 
     @FXML
     void verAlumnos(ActionEvent event) {
-
+    	Properties connConfig =ConexionBBDD.loadProperties() ;
+        String lang = connConfig.getProperty("language");
+        Locale locale = new Locale.Builder().setLanguage(lang).build();
+        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
+        Navegador.cargarVista("alumnos", bundle);
     }
 
     @FXML
@@ -70,12 +80,20 @@ public class LibrosController {
 
     @FXML
     void verDevoluciones(ActionEvent event) {
-
+    	Properties connConfig =ConexionBBDD.loadProperties() ;
+        String lang = connConfig.getProperty("language");
+        Locale locale = new Locale.Builder().setLanguage(lang).build();
+        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
+        Navegador.cargarVista("devoluciones", bundle);
     }
 
     @FXML
     void verInformes(ActionEvent event) {
-
+    	Properties connConfig =ConexionBBDD.loadProperties() ;
+        String lang = connConfig.getProperty("language");
+        Locale locale = new Locale.Builder().setLanguage(lang).build();
+        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
+        Navegador.cargarVista("informes", bundle);
     }
 
     @FXML
@@ -85,7 +103,19 @@ public class LibrosController {
 
     @FXML
     void verPrestamos(ActionEvent event) {
-
+    	Properties connConfig =ConexionBBDD.loadProperties() ;
+        String lang = connConfig.getProperty("language");
+        Locale locale = new Locale.Builder().setLanguage(lang).build();
+        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
+        Navegador.cargarVista("prestamos", bundle);
+    }
+    
+    /**
+     * Initialize.
+     */
+    @FXML
+    private void initialize() {
+    	btnLibros.setDisable(true);
     }
 
 }
