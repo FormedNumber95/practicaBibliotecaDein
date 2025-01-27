@@ -97,7 +97,7 @@ public class AlumnosController {
 	        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
 			FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/aniadirAlumnos.fxml"),bundle);
 			scene = new Scene(controlador.load());
-			s.setTitle("Nuevo Animal");
+			s.setTitle("Nuevo Alumno");
 			s.setScene(scene);
 			AniadirAlumnoController controller = controlador.getController();
 			
@@ -114,7 +114,35 @@ public class AlumnosController {
 
     @FXML
     void modificarAlumno(ActionEvent event) {
-
+    	esAniadir=false;
+    	if(tblAlumnos.getSelectionModel().getSelectedItem()!=null) {
+	    	s=new Stage();
+	    	Scene scene;
+			try {
+				Properties connConfig =ConexionBBDD.loadProperties() ;
+		        String lang = connConfig.getProperty("language");
+		        Locale locale = new Locale.Builder().setLanguage(lang).build();
+		        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
+				FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/aniadirAlumnos.fxml"),bundle);
+				scene = new Scene(controlador.load());
+				s.setTitle("Modificar Alumno");
+				s.setScene(scene);
+				AniadirAlumnoController controller = controlador.getController();
+				controller.getTxtApellido1().setText(tblAlumnos.getSelectionModel().getSelectedItem().getPriemrApellido());
+				controller.getTxtApellido2().setText(tblAlumnos.getSelectionModel().getSelectedItem().getSegundoApellido());
+				controller.getTxtDni().setText(tblAlumnos.getSelectionModel().getSelectedItem().getDni());
+				controller.getTxtDni().setDisable(true);
+				controller.getTxtNombre().setText(tblAlumnos.getSelectionModel().getSelectedItem().getNombre());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	        s.setResizable(false);
+	        s.initOwner(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.getStage());
+	        s.initModality(javafx.stage.Modality.WINDOW_MODAL);
+	        s.showAndWait();
+	        accionFiltrar(event);
+	        tblAlumnos.refresh();
+    	}
     }
 
     @FXML

@@ -70,7 +70,12 @@ public class AniadirAlumnoController {
     			}
     		}
     	}else {
-    		
+    		if(error.equals("")) {
+    			DaoAlumno.modificar(dni,nombre,ap1,ap2);
+    			error="Alumno modificado correctamente";
+    		}else {
+    			al.setAlertType(AlertType.ERROR);
+    		}
     	}
     	al.setContentText(error);
     	al.showAndWait();
@@ -87,5 +92,21 @@ public class AniadirAlumnoController {
     	}
     	return false;
     }
+    
+    public TextField getTxtApellido1() {
+		return txtApellido1;
+	}
+    
+    public TextField getTxtApellido2() {
+		return txtApellido2;
+	}
+    
+    public TextField getTxtDni() {
+		return txtDni;
+	}
+    
+    public TextField getTxtNombre() {
+		return txtNombre;
+	}
 
 }
