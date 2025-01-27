@@ -72,7 +72,12 @@ public class PrestamosController {
 
     @FXML
     void accionFiltrar(ActionEvent event) {
-
+    	tblHistorico.setItems(filtro);
+    	if(txtFiltro.getText().isEmpty()){
+    		tblHistorico.setItems(listaTodas);
+    	}else {
+    		filtro.setPredicate(observacion -> observacion.getCodLibro().contains(txtFiltro.getText()));
+    	}
     }
 
     @FXML
