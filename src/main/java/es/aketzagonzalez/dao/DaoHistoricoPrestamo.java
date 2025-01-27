@@ -1,9 +1,11 @@
 package es.aketzagonzalez.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import es.aketzagonzalez.db.ConexionBBDD;
 import es.aketzagonzalez.model.ModeloAlumno;
@@ -31,6 +33,20 @@ private static Connection con;
 			e.printStackTrace();
 		}
 		return lst;
+	}
+	
+	public static void insertar(String dni, int codigoLibro) {
+		con=ConexionBBDD.getConnection();
+		String insert="INSERT INTO Historico_prestamo (dni_alumno, codigo_libro, fecha_prestamo) VALUES(?, ?, ?)";
+		try {
+			PreparedStatement pstmt=con.prepareStatement(insert);
+			pstmt.setString(1,dni);
+			pstmt.setInt(2,codigoLibro);
+			pstmt.setDate(3,Date.valueOf(LocalDateTime.now().getYear()+"-"+LocalDateTime.now().getMonth()+"-"+LocalDateTime.now().getDayOfMonth()));
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

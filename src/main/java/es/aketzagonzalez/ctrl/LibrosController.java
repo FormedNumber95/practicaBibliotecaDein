@@ -128,7 +128,9 @@ public class LibrosController {
     @FXML
     void darDeBaja(ActionEvent event) {
     	if(tblLibros.getSelectionModel().getSelectedItem()!=null) {
-    		tblLibros.getSelectionModel().getSelectedItem().setBaja(new SimpleBooleanProperty(true));
+    		ModeloLibro l=tblLibros.getSelectionModel().getSelectedItem();
+    		l.setBaja(new SimpleBooleanProperty(true));
+    		DaoLibro.modificar(l.getTitulo(), l.getAutor(), l.getEditorial(), l.getEstado(), 1, l.getCodigo());
     		accionFiltrar(event);
 	        tblLibros.refresh();
     	}
@@ -227,7 +229,7 @@ public class LibrosController {
     	colEditorial.setCellValueFactory(new PropertyValueFactory<>("editorial"));
     	colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
     	colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-    	listaTodas=DaoLibro.conseguirListaTodos();
+    	listaTodas=DaoLibro.conseguirListaTodosNoBaja();
     	filtro = new FilteredList<ModeloLibro>(listaTodas);
     	tblLibros.setItems(listaTodas);
     }

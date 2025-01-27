@@ -1,5 +1,6 @@
 package es.aketzagonzalez.ctrl;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.Locale;
 import java.util.Properties;
@@ -15,12 +16,15 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class PrestamosController {
 
@@ -68,6 +72,8 @@ public class PrestamosController {
     
     private FilteredList<ModeloHistoricoPrestamos> filtro;
     
+    private static Stage s;
+    
     private static ObservableList<ModeloHistoricoPrestamos> listaTodas;
 
     @FXML
@@ -82,7 +88,29 @@ public class PrestamosController {
 
     @FXML
     void aniadirPrestamo(ActionEvent event) {
-
+    	s=new Stage();
+    	Scene scene;
+		try {
+			Properties connConfig =ConexionBBDD.loadProperties() ;
+	        String lang = connConfig.getProperty("language");
+	        Locale locale = new Locale.Builder().setLanguage(lang).build();
+	        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
+			FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/aniadirAlumnos.fxml"),bundle);
+			scene = new Scene(controlador.load());
+			s.setTitle("Nuevo Prestamo");
+			s.setScene(scene);
+			//TODO mirar si es aqui o en el historico
+			AniadirPrestamoController controller = controlador.getController();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        s.setResizable(false);
+        s.initOwner(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.getStage());
+        s.initModality(javafx.stage.Modality.WINDOW_MODAL);
+        s.showAndWait();
+        accionFiltrar(event);
+        tblHistorico.refresh();
     }
 
     @FXML
@@ -146,5 +174,9 @@ public class PrestamosController {
     	filtro=new FilteredList<ModeloHistoricoPrestamos>(listaTodas);
     	tblHistorico.setItems(listaTodas);
     }
+    
+    public static Stage getS() {
+		return s;
+	}
 
 }

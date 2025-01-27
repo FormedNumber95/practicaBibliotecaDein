@@ -32,6 +32,38 @@ private static Connection con;
 		return lst;
 	}
 	
+	public static ObservableList<ModeloLibro> conseguirListaTodosNoBaja(){
+		ObservableList<ModeloLibro>lst=FXCollections.observableArrayList();
+		try {
+			con=ConexionBBDD.getConnection();
+			String select="SELECT codigo,titulo,autor,editorial,estado,baja FROM Libro WHERE baja like 0";
+			PreparedStatement pstmt = con.prepareStatement(select);
+			ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+            	ModeloLibro animal=new ModeloLibro(rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("estado"), rs.getInt("baja"));
+            	animal.setCodigo(rs.getInt("codigo"));
+            	lst.add(animal);
+            }
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return lst;
+	}
+	
+	public static ModeloLibro conseguirPorCodigo(int codigo){
+		try {
+			con=ConexionBBDD.getConnection();
+			String select="SELECT titulo,autor,editorial,estado,baja FROM Libro where codigo=?";
+			PreparedStatement pstmt = con.prepareStatement(select);
+			pstmt.setInt(1,codigo);
+			ResultSet rs = pstmt.executeQuery();
+			return new ModeloLibro(rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("estado"), rs.getInt("baja")); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public static void insertar(String titulo, String autor, String editorial, String edad, int baja) {
 		con=ConexionBBDD.getConnection();
 		String insert="INSERT INTO Libro (titulo, autor, editorial, estado, baja) VALUES(?, ?, ?, ?, ?);";

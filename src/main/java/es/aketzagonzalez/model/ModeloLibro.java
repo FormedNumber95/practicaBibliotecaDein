@@ -185,4 +185,9 @@ public class ModeloLibro {
 				&& Objects.equals(editorial, other.editorial) && Objects.equals(estado, other.estado)
 				&& Objects.equals(titulo, other.titulo);
 	}
+	
+	@Override
+	public String toString() {
+		return this.titulo+", "+this.autor+", "+this.editorial;
+	}
 }

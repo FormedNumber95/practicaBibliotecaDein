@@ -1,5 +1,9 @@
 package es.aketzagonzalez.ctrl;
 
+import es.aketzagonzalez.dao.DaoAlumno;
+import es.aketzagonzalez.dao.DaoLibro;
+import es.aketzagonzalez.model.ModeloAlumno;
+import es.aketzagonzalez.model.ModeloLibro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,19 +18,28 @@ public class AniadirPrestamoController {
     private Button btnGuardar;
 
     @FXML
-    private ComboBox<?> cmbAlumno;
+    private ComboBox<ModeloAlumno> cmbAlumno;
 
     @FXML
-    private ComboBox<?> cmbLibro;
+    private ComboBox<ModeloLibro> cmbLibro;
 
     @FXML
     void accionCancelar(ActionEvent event) {
-
+    	PrestamosController.getS().close();
     }
 
     @FXML
     void accionGuardar(ActionEvent event) {
-
+    	
+    }
+    
+    /**
+     * Initialize.
+     */
+    @FXML
+    private void initialize() {
+    	cmbAlumno.getItems().addAll(DaoAlumno.conseguirListaTodos());
+    	cmbLibro.getItems().addAll(DaoLibro.conseguirListaTodosNoBaja());
     }
 
 }
