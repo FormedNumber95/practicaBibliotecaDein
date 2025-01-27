@@ -66,12 +66,12 @@
                   <Insets right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <TableView>
+            <TableView fx:id="tblDevoluciones">
                <columns>
-                  <TableColumn prefWidth="117.60000038146973" text="%label.id_prestamo" />
-                  <TableColumn prefWidth="156.7999267578125" text="%label.dni_alumno" />
-                  <TableColumn prefWidth="185.5999755859375" text="%label.cod_libro" />
-                  <TableColumn prefWidth="254.4000244140625" text="%label.fecha_prestamo" />
+                  <TableColumn fx:id="colIdPrestamo" prefWidth="117.60000038146973" text="%label.id_prestamo" />
+                  <TableColumn fx:id="colDniAlumno" prefWidth="156.7999267578125" text="%label.dni_alumno" />
+                  <TableColumn fx:id="colCodLibro" prefWidth="185.5999755859375" text="%label.cod_libro" />
+                  <TableColumn fx:id="colFechaPrestamo" prefWidth="254.4000244140625" text="%label.fecha_prestamo" />
                </columns>
             </TableView>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="700.0" spacing="30.0">

@@ -1,20 +1,22 @@
 package es.aketzagonzalez.ctrl;
 
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import es.aketzagonzalez.dao.DaoAlumno;
 import es.aketzagonzalez.db.ConexionBBDD;
-import es.aketzagonzalez.model.Navegador;
-import es.aketzagonzalez.practicaBibliotecaDein.Lanzador;
+import es.aketzagonzalez.model.ModeloAlumno;
+import es.aketzagonzalez.utilidad.Navegador;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -47,7 +49,26 @@ public class AlumnosController {
     @FXML
     private TextField txtFiltro;
     
+    @FXML
+    private TableColumn<ModeloAlumno, String> colAp1;
+
+    @FXML
+    private TableColumn<ModeloAlumno, String> colAp2;
+
+    @FXML
+    private TableColumn<ModeloAlumno, String> colDni;
+
+    @FXML
+    private TableColumn<ModeloAlumno, String> colNombre;
+    
+    @FXML
+    private TableView<ModeloAlumno> tblAlumnos;
+    
+    private FilteredList<ModeloAlumno> filtro;
+    
     private static Stage s;
+    
+    private static ObservableList<ModeloAlumno> listaTodas;
 
     @FXML
     void accionFiltrar(ActionEvent event) {
@@ -116,6 +137,13 @@ public class AlumnosController {
     @FXML
     private void initialize() {
     	btnAlumnos.setDisable(true);
+    	colDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
+    	colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+    	colAp1.setCellValueFactory(new PropertyValueFactory<>("priemrApellido")); // Este nombre tiene un error tipográfico
+    	colAp2.setCellValueFactory(new PropertyValueFactory<>("segundoApellido"));
+    	listaTodas=DaoAlumno.conseguirListaTodos();
+    	filtro = new FilteredList<ModeloAlumno>(listaTodas);
+    	tblAlumnos.setItems(listaTodas);
     }
 
 }

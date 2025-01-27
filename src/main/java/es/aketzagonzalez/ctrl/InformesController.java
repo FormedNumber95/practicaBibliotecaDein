@@ -5,7 +5,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import es.aketzagonzalez.db.ConexionBBDD;
-import es.aketzagonzalez.model.Navegador;
+import es.aketzagonzalez.utilidad.Navegador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
