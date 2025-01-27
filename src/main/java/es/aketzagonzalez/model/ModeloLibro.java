@@ -2,6 +2,9 @@ package es.aketzagonzalez.model;
 
 import java.util.Objects;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * The Class ModeloLibro.
  * @author Aketza
@@ -22,7 +25,7 @@ public class ModeloLibro {
 	private String estado;
 	
 	/** The baja. */
-	private Boolean baja;
+	private BooleanProperty baja;
 	
 	/** The codigo. */
 	private int codigo;
@@ -36,13 +39,13 @@ public class ModeloLibro {
 	 * @param estado the estado
 	 * @param baja the baja
 	 */
-	public ModeloLibro(String titulo, String autor, String editorial, String estado, Boolean baja) {
+	public ModeloLibro(String titulo, String autor, String editorial, String estado, int baja) {
 		super();
 		this.titulo = titulo;
 		this.autor = autor;
 		this.editorial = editorial;
 		this.estado = estado;
-		this.baja = baja;
+		this.baja = new SimpleBooleanProperty(baja==1);
 	}
 
 	/**
@@ -122,7 +125,7 @@ public class ModeloLibro {
 	 *
 	 * @return the baja
 	 */
-	public Boolean getBaja() {
+	public BooleanProperty getBaja() {
 		return baja;
 	}
 
@@ -131,7 +134,7 @@ public class ModeloLibro {
 	 *
 	 * @param baja the new baja
 	 */
-	public void setBaja(Boolean baja) {
+	public void setBaja(BooleanProperty baja) {
 		this.baja = baja;
 	}
 
@@ -160,7 +163,7 @@ public class ModeloLibro {
 	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(autor, baja, editorial, estado, titulo);
+		return Objects.hash(autor, editorial, estado, titulo);
 	}
 
 	/**
@@ -178,7 +181,7 @@ public class ModeloLibro {
 		if (getClass() != obj.getClass())
 			return false;
 		ModeloLibro other = (ModeloLibro) obj;
-		return Objects.equals(autor, other.autor) && Objects.equals(baja, other.baja)
+		return Objects.equals(autor, other.autor)
 				&& Objects.equals(editorial, other.editorial) && Objects.equals(estado, other.estado)
 				&& Objects.equals(titulo, other.titulo);
 	}
