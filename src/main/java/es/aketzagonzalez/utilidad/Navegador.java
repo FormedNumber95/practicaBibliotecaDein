@@ -1,4 +1,4 @@
-package es.aketzagonzalez.model;
+package es.aketzagonzalez.utilidad;
 
 import java.io.IOException;
 import java.util.ResourceBundle;

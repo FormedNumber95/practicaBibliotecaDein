@@ -98,12 +98,12 @@
                   <Insets right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <TableView>
+            <TableView fx:id="tblAlumnos">
               <columns>
-                <TableColumn prefWidth="229.60000228881836" text="%label.dni" />
-                <TableColumn prefWidth="180.8000030517578" text="%label.nombre" />
-                  <TableColumn prefWidth="132.0" text="%label.apellido1" />
-                  <TableColumn prefWidth="167.2000732421875" text="%label.apellido2" />
+                <TableColumn fx:id="colDni" prefWidth="229.60000228881836" text="%label.dni" />
+                <TableColumn fx:id="colNombre" prefWidth="180.8000030517578" text="%label.nombre" />
+                  <TableColumn fx:id="colAp1" prefWidth="132.0" text="%label.apellido1" />
+                  <TableColumn fx:id="colAp2" prefWidth="167.2000732421875" text="%label.apellido2" />
               </columns>
             </TableView>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="700.0" spacing="30.0">

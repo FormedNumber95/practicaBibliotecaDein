@@ -66,14 +66,14 @@
                   <Insets right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <TableView>
+            <TableView fx:id="tblLibros">
                <columns>
-                  <TableColumn prefWidth="114.39999771118164" text="%label.codigo" />
-                  <TableColumn prefWidth="201.59996032714844" text="%label.titulo" />
-                  <TableColumn prefWidth="156.79998779296875" text="%label.autor" />
-                  <TableColumn prefWidth="138.39996337890625" text="%label.editorial" />
-                  <TableColumn prefWidth="149.5999755859375" text="%label.estado" />
-                  <TableColumn prefWidth="92.800048828125" text="%label.baja" />
+                  <TableColumn fx:id="colCod" prefWidth="114.39999771118164" text="%label.codigo" />
+                  <TableColumn fx:id="colTitulo" prefWidth="201.59996032714844" text="%label.titulo" />
+                  <TableColumn fx:id="colAutor" prefWidth="156.79998779296875" text="%label.autor" />
+                  <TableColumn fx:id="colEditorial" prefWidth="138.39996337890625" text="%label.editorial" />
+                  <TableColumn fx:id="colEstado" prefWidth="149.5999755859375" text="%label.estado" />
+                  <TableColumn fx:id="colBaja" prefWidth="92.800048828125" text="%label.baja" />
                </columns>
             </TableView>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="700.0" spacing="30.0">

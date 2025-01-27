@@ -15,7 +15,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import es.aketzagonzalez.db.ConexionBBDD;
-import es.aketzagonzalez.model.Navegador;
+import es.aketzagonzalez.utilidad.Navegador;
 
 
 public class Lanzador extends Application {
