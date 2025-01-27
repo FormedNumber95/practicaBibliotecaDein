@@ -70,7 +70,12 @@ public class DevolucionesController {
 
     @FXML
     void accionFiltrar(ActionEvent event) {
-
+    	tblDevoluciones.setItems(filtro);
+    	if(txtFiltro.getText().isEmpty()){
+    		tblDevoluciones.setItems(listaTodas);
+    	}else {
+    		filtro.setPredicate(observacion -> observacion.getCodLibro().contains(txtFiltro.getText()));
+    	}
     }
 
     @FXML
