@@ -80,7 +80,12 @@ public class LibrosController {
 
     @FXML
     void accionFiltrar(ActionEvent event) {
-
+    	tblLibros.setItems(filtro);
+    	if(txtFiltro.getText().isEmpty()){
+    		tblLibros.setItems(listaTodas);
+    	}else {
+    		filtro.setPredicate(observacion -> observacion.getTitulo().contains(txtFiltro.getText()));
+    	}
     }
 
     @FXML
