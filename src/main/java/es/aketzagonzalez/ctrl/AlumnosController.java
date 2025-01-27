@@ -72,7 +72,12 @@ public class AlumnosController {
 
     @FXML
     void accionFiltrar(ActionEvent event) {
-
+    	tblAlumnos.setItems(filtro);
+    	if(txtFiltro.getText().isEmpty()){
+    		tblAlumnos.setItems(listaTodas);
+    	}else {
+    		filtro.setPredicate(observacion -> observacion.getNombre().contains(txtFiltro.getText()));
+    	}
     }
 
     @FXML
