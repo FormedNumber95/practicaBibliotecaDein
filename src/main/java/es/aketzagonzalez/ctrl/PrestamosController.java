@@ -84,6 +84,9 @@ public class PrestamosController {
     @FXML
     private TextField txtFiltro;
     
+    @FXML
+    private TextField txtFiltroDni;
+    
     private FilteredList<ModeloHistoricoPrestamos> filtro;
     
     private static Stage s;
@@ -92,13 +95,21 @@ public class PrestamosController {
 
     @FXML
     void accionFiltrar(ActionEvent event) {
-    	tblHistorico.setItems(filtro);
-    	if(txtFiltro.getText().isEmpty()){
-    		tblHistorico.setItems(listaTodas);
-    	}else {
-    		filtro.setPredicate(observacion -> observacion.getCodLibro().contains(txtFiltro.getText()));
-    	}
+        tblHistorico.setItems(filtro);
+        
+        if (txtFiltro.getText().isEmpty() && txtFiltroDni.getText().isEmpty()) {
+            tblHistorico.setItems(listaTodas);
+        } else {
+            String filtroCodLibro = txtFiltro.getText().trim();
+            String filtroDni = txtFiltroDni.getText().trim();
+            filtro.setPredicate(observacion -> {
+                boolean coincideCodLibro = filtroCodLibro.isEmpty() || observacion.getCodLibro().contains(filtroCodLibro);
+                boolean coincideDni = filtroDni.isEmpty() || observacion.getDni().contains(filtroDni);
+                return coincideCodLibro && coincideDni;
+            });
+        }
     }
+
 
     @FXML
     void aniadirPrestamo(ActionEvent event) {

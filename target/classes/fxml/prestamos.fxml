@@ -63,8 +63,18 @@
                      </toggleGroup>
                   </RadioButton>
                   <RadioButton fx:id="radDevueltos" mnemonicParsing="false" onAction="#verDevueltos" text="%label.devueltos" toggleGroup="$grupoDevueltos" />
-                  <RadioButton fx:id="radPendientes" mnemonicParsing="false" onAction="#verPendientes" text="%label.Pendientes" toggleGroup="$grupoDevueltos" />
-                  <Label text="%label.filtro" />
+                  <RadioButton fx:id="radPendientes" mnemonicParsing="false" onAction="#verPendientes" text="%label.Pendientes" toggleGroup="$grupoDevueltos">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </RadioButton>
+                  <Label text="%label.filtroDni" />
+                  <TextField fx:id="txtFiltroDni" onAction="#accionFiltrar">
+                     <tooltip>
+                        <Tooltip text="%label.ayudaFiltro" />
+                     </tooltip>
+                  </TextField>
+                  <Label text="%label.filtroCodLibro" />
                   <TextField fx:id="txtFiltro" onAction="#accionFiltrar">
                      <tooltip>
                         <Tooltip text="%label.ayudaFiltro" />
