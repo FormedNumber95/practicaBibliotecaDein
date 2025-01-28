@@ -87,6 +87,42 @@ private static Connection con;
 		        e.printStackTrace();
 		 }
 	}
+	
+	public static ObservableList<ModeloHistoricoPrestamos> conseguirListaNoDevueltos(){
+		ObservableList<ModeloHistoricoPrestamos>lst=FXCollections.observableArrayList();
+		try {
+			con=ConexionBBDD.getConnection();
+			String select="SELECT id_prestamo,dni_alumno,codigo_libro,fecha_prestamo,fecha_devolucion FROM Historico_prestamo WHERE fecha_devolucion IS NULL";
+			PreparedStatement pstmt = con.prepareStatement(select);
+			ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+            	ModeloHistoricoPrestamos animal=new ModeloHistoricoPrestamos(rs.getString("dni_alumno"), rs.getString("codigo_libro"), rs.getDate("fecha_prestamo"), rs.getDate("fecha_devolucion"));
+            	animal.setCodigo(rs.getInt("id_prestamo"));
+            	lst.add(animal);
+            }
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return lst;
+	}
+	
+	public static ObservableList<ModeloHistoricoPrestamos> conseguirListaDevueltos(){
+		ObservableList<ModeloHistoricoPrestamos>lst=FXCollections.observableArrayList();
+		try {
+			con=ConexionBBDD.getConnection();
+			String select="SELECT id_prestamo,dni_alumno,codigo_libro,fecha_prestamo,fecha_devolucion FROM Historico_prestamo WHERE fecha_devolucion IS NOT NULL";
+			PreparedStatement pstmt = con.prepareStatement(select);
+			ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+            	ModeloHistoricoPrestamos animal=new ModeloHistoricoPrestamos(rs.getString("dni_alumno"), rs.getString("codigo_libro"), rs.getDate("fecha_prestamo"), rs.getDate("fecha_devolucion"));
+            	animal.setCodigo(rs.getInt("id_prestamo"));
+            	lst.add(animal);
+            }
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return lst;
+	}
 
 	
 }

@@ -5,9 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -55,6 +57,13 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="700.0" spacing="10.0">
                <children>
+                  <RadioButton fx:id="radTodos" mnemonicParsing="false" onAction="#verTodos" selected="true" text="%label.todos">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="grupoDevueltos" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="radDevueltos" mnemonicParsing="false" onAction="#verDevueltos" text="%label.devueltos" toggleGroup="$grupoDevueltos" />
+                  <RadioButton fx:id="radPendientes" mnemonicParsing="false" onAction="#verPendientes" text="%label.Pendientes" toggleGroup="$grupoDevueltos" />
                   <Label text="%label.filtro" />
                   <TextField fx:id="txtFiltro" onAction="#accionFiltrar">
                      <tooltip>
