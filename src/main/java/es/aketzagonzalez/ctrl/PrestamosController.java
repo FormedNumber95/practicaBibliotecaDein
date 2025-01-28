@@ -95,11 +95,10 @@ public class PrestamosController {
 	        String lang = connConfig.getProperty("language");
 	        Locale locale = new Locale.Builder().setLanguage(lang).build();
 	        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
-			FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/aniadirAlumnos.fxml"),bundle);
+			FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/aniadirPrestamo.fxml"),bundle);
 			scene = new Scene(controlador.load());
 			s.setTitle("Nuevo Prestamo");
 			s.setScene(scene);
-			//TODO mirar si es aqui o en el historico
 			AniadirPrestamoController controller = controlador.getController();
 			
 		} catch (IOException e) {
@@ -111,6 +110,7 @@ public class PrestamosController {
         s.showAndWait();
         accionFiltrar(event);
         tblHistorico.refresh();
+        tblHistorico.setItems(DaoHistoricoPrestamo.conseguirListaTodos());
     }
 
     @FXML

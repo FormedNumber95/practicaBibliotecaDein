@@ -5,7 +5,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import es.aketzagonzalez.db.ConexionBBDD;
 import es.aketzagonzalez.model.ModeloAlumno;
@@ -35,18 +37,41 @@ private static Connection con;
 		return lst;
 	}
 	
-	public static void insertar(String dni, int codigoLibro) {
-		con=ConexionBBDD.getConnection();
-		String insert="INSERT INTO Historico_prestamo (dni_alumno, codigo_libro, fecha_prestamo) VALUES(?, ?, ?)";
+	public static int conseguirCodigo(String dni, int codigoLibro,LocalDateTime now){
 		try {
-			PreparedStatement pstmt=con.prepareStatement(insert);
-			pstmt.setString(1,dni);
-			pstmt.setInt(2,codigoLibro);
-			pstmt.setDate(3,Date.valueOf(LocalDateTime.now().getYear()+"-"+LocalDateTime.now().getMonth()+"-"+LocalDateTime.now().getDayOfMonth()));
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
+			con=ConexionBBDD.getConnection();
+			String select="SELECT id_prestamo FROM Historico_prestamo WHERE dni_alumno like ? AND codigo_libro like ? AND fecha_prestamo like ?";
+			PreparedStatement pstmt = con.prepareStatement(select);
+			pstmt.setString(1, dni);
+			pstmt.setInt(2, codigoLibro);
+			LocalDateTime truncatedNow = now.truncatedTo(ChronoUnit.SECONDS);
+	        pstmt.setTimestamp(3, Timestamp.valueOf(truncatedNow));
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				 return rs.getInt("id_prestamo");
+			}
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println("NO TENDRIAS QUE VER ESO");
+		return -1;
 	}
+	
+	public static void insertar(String dni, int codigoLibro,LocalDateTime now) {
+	    con = ConexionBBDD.getConnection();
+	    String insert = "INSERT INTO Historico_prestamo (dni_alumno, codigo_libro, fecha_prestamo) VALUES(?, ?, ?)";
+	    try {
+	        PreparedStatement pstmt = con.prepareStatement(insert);
+	        pstmt.setString(1, dni);
+	        pstmt.setInt(2, codigoLibro);
+	        LocalDateTime truncatedNow = now.truncatedTo(ChronoUnit.SECONDS);
+	        pstmt.setTimestamp(3, Timestamp.valueOf(truncatedNow));
+	        pstmt.executeUpdate();
+	        con.commit();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 	
 }
