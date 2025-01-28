@@ -72,6 +72,19 @@ private static Connection con;
 	        e.printStackTrace();
 	    }
 	}
+	
+	public static void devolver(int codigo) {
+		 String update="UPDATE Historico_prestamo SET fecha_devolucion=? WHERE id_prestamo like ?;";
+		 try {
+			 PreparedStatement pstmt = con.prepareStatement(update);
+			 LocalDateTime now=LocalDateTime.now();
+			 LocalDateTime truncatedNow = now.truncatedTo(ChronoUnit.SECONDS);
+			 pstmt.setInt(2, codigo);
+			 pstmt.executeUpdate();
+		 } catch (SQLException e) {
+		        e.printStackTrace();
+		 }
+	}
 
 	
 }

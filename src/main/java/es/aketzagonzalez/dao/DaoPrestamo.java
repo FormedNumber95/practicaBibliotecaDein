@@ -49,4 +49,15 @@ private static Connection con;
 	    }
 	}
 	
+	public static void borrar(int codigo) {
+		String delete="DELETE FROM Prestamo WHERE id_prestamo like ?";
+		try {
+	        PreparedStatement pstmt = con.prepareStatement(delete);
+	        pstmt.setInt(1, codigo);
+	        pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
 }
