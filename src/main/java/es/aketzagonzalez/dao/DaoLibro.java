@@ -1,5 +1,6 @@
 package es.aketzagonzalez.dao;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,12 +19,13 @@ private static Connection con;
 		ObservableList<ModeloLibro>lst=FXCollections.observableArrayList();
 		try {
 			con=ConexionBBDD.getConnection();
-			String select="SELECT codigo,titulo,autor,editorial,estado,baja FROM Libro";
+			String select="SELECT codigo,titulo,autor,editorial,estado,baja,portada FROM Libro";
 			PreparedStatement pstmt = con.prepareStatement(select);
 			ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
             	ModeloLibro animal=new ModeloLibro(rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("estado"), rs.getInt("baja"));
             	animal.setCodigo(rs.getInt("codigo"));
+            	animal.fijarFoto(rs.getBinaryStream("portada"));
             	lst.add(animal);
             }
 		}catch(SQLException e) {
@@ -36,12 +38,13 @@ private static Connection con;
 		ObservableList<ModeloLibro>lst=FXCollections.observableArrayList();
 		try {
 			con=ConexionBBDD.getConnection();
-			String select="SELECT codigo,titulo,autor,editorial,estado,baja FROM Libro WHERE baja like 0";
+			String select="SELECT codigo,titulo,autor,editorial,estado,baja,portada FROM Libro WHERE baja like 0";
 			PreparedStatement pstmt = con.prepareStatement(select);
 			ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
             	ModeloLibro animal=new ModeloLibro(rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("estado"), rs.getInt("baja"));
             	animal.setCodigo(rs.getInt("codigo"));
+            	animal.fijarFoto(rs.getBinaryStream("portada"));
             	lst.add(animal);
             }
 		}catch(SQLException e) {
@@ -53,20 +56,22 @@ private static Connection con;
 	public static ModeloLibro conseguirPorCodigo(int codigo){
 		try {
 			con=ConexionBBDD.getConnection();
-			String select="SELECT titulo,autor,editorial,estado,baja FROM Libro where codigo=?";
+			String select="SELECT titulo,autor,editorial,estado,baja,portada FROM Libro where codigo=?";
 			PreparedStatement pstmt = con.prepareStatement(select);
 			pstmt.setInt(1,codigo);
 			ResultSet rs = pstmt.executeQuery();
-			return new ModeloLibro(rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("estado"), rs.getInt("baja")); 
+			ModeloLibro l= new ModeloLibro(rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("estado"), rs.getInt("baja"));
+			l.fijarFoto(rs.getBinaryStream("portada"));
+			return l;
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static void insertar(String titulo, String autor, String editorial, String edad, int baja) {
+	public static void insertar(String titulo, String autor, String editorial, String edad, int baja,InputStream inputStream) {
 		con=ConexionBBDD.getConnection();
-		String insert="INSERT INTO Libro (titulo, autor, editorial, estado, baja) VALUES(?, ?, ?, ?, ?);";
+		String insert="INSERT INTO Libro (titulo, autor, editorial, estado, baja,portada) VALUES(?, ?, ?, ?, ?,?);";
 		try {
 			PreparedStatement pstmt=con.prepareStatement(insert);
 			pstmt.setString(1,titulo);
@@ -74,15 +79,16 @@ private static Connection con;
 			pstmt.setString(3,editorial);
 			pstmt.setString(4,edad);
 			pstmt.setInt(5, baja);
+			pstmt.setBinaryStream(6,inputStream);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static void modificar(String titulo, String autor, String editorial, String edad, int baja,int codigo) {
+	public static void modificar(String titulo, String autor, String editorial, String edad, int baja,int codigo,InputStream inputStream) {
 		con=ConexionBBDD.getConnection();
-		String update="UPDATE Libro SET titulo=?, autor=?, editorial=?,estado=?,baja=? WHERE codigo=?";
+		String update="UPDATE Libro SET titulo=?, autor=?, editorial=?,estado=?,baja=?,portada=? WHERE codigo=?";
 		try {
 			PreparedStatement pstmt=con.prepareStatement(update);
 			pstmt.setString(1,titulo);
@@ -90,11 +96,11 @@ private static Connection con;
 			pstmt.setString(3,editorial);
 			pstmt.setString(4,edad);
 			pstmt.setInt(5, baja);
-			pstmt.setInt(6,codigo);
+			pstmt.setBinaryStream(6,inputStream);
+			pstmt.setInt(7,codigo);
 			pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
 }

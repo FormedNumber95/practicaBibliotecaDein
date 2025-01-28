@@ -74,6 +74,7 @@
                   <TableColumn fx:id="colEditorial" prefWidth="138.39996337890625" text="%label.editorial" />
                   <TableColumn fx:id="colEstado" prefWidth="149.5999755859375" text="%label.estado" />
                   <TableColumn fx:id="colBaja" prefWidth="92.800048828125" text="%label.baja" />
+                  <TableColumn fx:id="colPortada" prefWidth="92.800048828125" text="%label.portada" />
                </columns>
             </TableView>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="700.0" spacing="30.0">

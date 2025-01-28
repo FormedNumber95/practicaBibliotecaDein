@@ -1,5 +1,8 @@
 package es.aketzagonzalez.model;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 import javafx.beans.property.BooleanProperty;
@@ -29,6 +32,8 @@ public class ModeloLibro {
 	
 	/** The codigo. */
 	private int codigo;
+	
+	private byte[] imagen;
 	
 	/**
 	 * Instantiates a new modelo libro.
@@ -164,6 +169,33 @@ public class ModeloLibro {
 	@Override
 	public int hashCode() {
 		return Objects.hash(autor, editorial, estado, titulo);
+	}
+	
+	/**
+	 * Fijar foto.
+	 *
+	 * @param foto the foto
+	 */
+	public void fijarFoto(InputStream foto) {
+		if(foto!=null) {
+			try {
+				this.imagen=foto.readAllBytes();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Gets the foto stream.
+	 *
+	 * @return the foto stream
+	 */
+	public InputStream getFotoStream() {
+		if(imagen==null) {
+			return null;
+		}
+		return new ByteArrayInputStream(imagen);
 	}
 
 	/**

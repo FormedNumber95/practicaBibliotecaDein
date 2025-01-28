@@ -1,6 +1,8 @@
 package es.aketzagonzalez.ctrl;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -12,6 +14,7 @@ import es.aketzagonzalez.model.ModeloAlumno;
 import es.aketzagonzalez.model.ModeloLibro;
 import es.aketzagonzalez.utilidad.Navegador;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -25,6 +28,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class LibrosController {
@@ -70,6 +75,9 @@ public class LibrosController {
 
     @FXML
     private TableColumn<ModeloLibro, String> colTitulo;
+    
+    @FXML
+    private TableColumn<ModeloLibro, ImageView> colPortada;
     
     @FXML
     private TableView<ModeloLibro> tblLibros;
@@ -130,7 +138,7 @@ public class LibrosController {
     	if(tblLibros.getSelectionModel().getSelectedItem()!=null) {
     		ModeloLibro l=tblLibros.getSelectionModel().getSelectedItem();
     		l.setBaja(new SimpleBooleanProperty(true));
-    		DaoLibro.modificar(l.getTitulo(), l.getAutor(), l.getEditorial(), l.getEstado(), 1, l.getCodigo());
+    		DaoLibro.modificar(l.getTitulo(), l.getAutor(), l.getEditorial(), l.getEstado(), 1, l.getCodigo(),l.getFotoStream());
     		accionFiltrar(event);
 	        tblLibros.refresh();
     	}
@@ -229,9 +237,42 @@ public class LibrosController {
     	colEditorial.setCellValueFactory(new PropertyValueFactory<>("editorial"));
     	colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
     	colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+    	colPortada.setCellValueFactory(cellData -> 
+        	new SimpleObjectProperty<>(convertirBytesAImageView(cellData.getValue().getFotoStream())));
     	listaTodas=DaoLibro.conseguirListaTodosNoBaja();
     	filtro = new FilteredList<ModeloLibro>(listaTodas);
     	tblLibros.setItems(listaTodas);
+    }
+    
+    /**
+     * Gets the imagen input stream.
+     *
+     * @param url the url
+     * @return the imagen input stream
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
+    public static InputStream getImagenInputStream(URL url) throws IOException {
+        if (url == null) {
+            throw new IllegalArgumentException("La URL no puede ser nula.");
+        }
+        return url.openStream();
+    }
+    
+    /**
+     * Convertir bytes A image view.
+     *
+     * @param fotoStream the foto stream
+     * @return the image view
+     */
+    private ImageView convertirBytesAImageView(InputStream fotoStream) {
+        if (fotoStream == null) {
+            return null;
+        }
+        Image imagen = new Image(fotoStream);
+        ImageView imageView = new ImageView(imagen);
+        imageView.setFitWidth(50);  // Ajusta el tamaño según sea necesario
+        imageView.setPreserveRatio(true);
+        return imageView;
     }
     
     public static Stage getS() {
