@@ -1,5 +1,8 @@
 package es.aketzagonzalez.ctrl;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -10,16 +13,24 @@ import es.aketzagonzalez.db.ConexionBBDD;
 import es.aketzagonzalez.model.ModeloAlumno;
 import es.aketzagonzalez.model.ModeloLibro;
 import es.aketzagonzalez.utilidad.Navegador;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class LibrosController {
 
@@ -66,6 +77,9 @@ public class LibrosController {
     private TableColumn<ModeloLibro, String> colTitulo;
     
     @FXML
+    private TableColumn<ModeloLibro, ImageView> colPortada;
+    
+    @FXML
     private TableView<ModeloLibro> tblLibros;
 
     @FXML
@@ -76,7 +90,11 @@ public class LibrosController {
     
     private FilteredList<ModeloLibro> filtro;
     
+    private static Stage s;
+    
     private static ObservableList<ModeloLibro> listaTodas;
+    
+    private static boolean esAniadir;
 
     @FXML
     void accionFiltrar(ActionEvent event) {
@@ -90,17 +108,75 @@ public class LibrosController {
 
     @FXML
     void aniadirLibro(ActionEvent event) {
-
+    	esAniadir=true;
+    	s=new Stage();
+    	Scene scene;
+		try {
+			Properties connConfig =ConexionBBDD.loadProperties() ;
+	        String lang = connConfig.getProperty("language");
+	        Locale locale = new Locale.Builder().setLanguage(lang).build();
+	        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
+			FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/aniadirLibro.fxml"),bundle);
+			scene = new Scene(controlador.load());
+			s.setTitle("Nuevo Libro");
+			s.setScene(scene);
+			AniadirLibroController controller = controlador.getController();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        s.setResizable(false);
+        s.initOwner(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.getStage());
+        s.initModality(javafx.stage.Modality.WINDOW_MODAL);
+        s.showAndWait();
+        accionFiltrar(event);
+        tblLibros.refresh();
     }
 
     @FXML
     void darDeBaja(ActionEvent event) {
-
+    	if(tblLibros.getSelectionModel().getSelectedItem()!=null) {
+    		ModeloLibro l=tblLibros.getSelectionModel().getSelectedItem();
+    		l.setBaja(new SimpleBooleanProperty(true));
+    		DaoLibro.modificar(l.getTitulo(), l.getAutor(), l.getEditorial(), l.getEstado(), 1, l.getCodigo(),l.getFotoStream());
+    		accionFiltrar(event);
+    		tblLibros.setItems(DaoLibro.conseguirListaTodosNoBaja());
+	        tblLibros.refresh();
+    	}
     }
 
     @FXML
     void modificarLibro(ActionEvent event) {
-
+    	esAniadir=false;
+    	if(tblLibros.getSelectionModel().getSelectedItem()!=null) {
+	    	s=new Stage();
+	    	Scene scene;
+			try {
+				Properties connConfig =ConexionBBDD.loadProperties() ;
+		        String lang = connConfig.getProperty("language");
+		        Locale locale = new Locale.Builder().setLanguage(lang).build();
+		        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
+				FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/aniadirLibro.fxml"),bundle);
+				scene = new Scene(controlador.load());
+				s.setTitle("Modificar Libro");
+				s.setScene(scene);
+				AniadirLibroController controller = controlador.getController();
+				ModeloLibro l=tblLibros.getSelectionModel().getSelectedItem();
+				controller.setCodigo(l.getCodigo());
+				controller.getChkBaja().setSelected(l.getBaja().get());
+				controller.getTxtAutor().setText(l.getAutor());
+				controller.getTxtEditorial().setText(l.getEditorial());
+				controller.getTxtTitulo().setText(l.getTitulo());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	        s.setResizable(false);
+	        s.initOwner(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.getStage());
+	        s.initModality(javafx.stage.Modality.WINDOW_MODAL);
+	        s.showAndWait();
+	        accionFiltrar(event);
+	        tblLibros.refresh();
+    	}
     }
 
     @FXML
@@ -156,14 +232,60 @@ public class LibrosController {
     private void initialize() {
     	btnLibros.setDisable(true);
     	colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
-    	colBaja.setCellValueFactory(new PropertyValueFactory<>("baja"));
+    	colBaja.setCellValueFactory(cellData -> cellData.getValue().getBaja());
+    	colBaja.setCellFactory(CheckBoxTableCell.forTableColumn(colBaja));
     	colCod.setCellValueFactory(new PropertyValueFactory<>("codigo"));
     	colEditorial.setCellValueFactory(new PropertyValueFactory<>("editorial"));
     	colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
     	colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-    	listaTodas=DaoLibro.conseguirListaTodos();
+    	colPortada.setCellValueFactory(cellData -> 
+        	new SimpleObjectProperty<>(convertirBytesAImageView(cellData.getValue().getFotoStream())));
+    	listaTodas=DaoLibro.conseguirListaTodosNoBaja();
     	filtro = new FilteredList<ModeloLibro>(listaTodas);
     	tblLibros.setItems(listaTodas);
     }
+    
+    /**
+     * Gets the imagen input stream.
+     *
+     * @param url the url
+     * @return the imagen input stream
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
+    public static InputStream getImagenInputStream(URL url) throws IOException {
+        if (url == null) {
+            throw new IllegalArgumentException("La URL no puede ser nula.");
+        }
+        return url.openStream();
+    }
+    
+    /**
+     * Convertir bytes A image view.
+     *
+     * @param fotoStream the foto stream
+     * @return the image view
+     */
+    private ImageView convertirBytesAImageView(InputStream fotoStream) {
+        if (fotoStream == null) {
+            return null;
+        }
+        Image imagen = new Image(fotoStream);
+        ImageView imageView = new ImageView(imagen);
+        imageView.setFitWidth(50);  // Ajusta el tamaño según sea necesario
+        imageView.setPreserveRatio(true);
+        return imageView;
+    }
+    
+    public static Stage getS() {
+		return s;
+	}
+    
+    public static boolean isEsAniadir() {
+		return esAniadir;
+	}
+    
+    public static void setListaTodas(ObservableList<ModeloLibro> listaTodas) {
+		LibrosController.listaTodas = listaTodas;
+	}
 
 }

@@ -137,4 +137,8 @@ public class ModeloAlumno {
 		return Objects.equals(dni, other.dni);
 	}
 	
+	@Override
+	public String toString() {
+		return this.nombre+" "+this.priemrApellido+" "+this.segundoApellido;
+	}
 }

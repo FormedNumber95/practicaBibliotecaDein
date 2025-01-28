@@ -1,6 +1,12 @@
 package es.aketzagonzalez.model;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 /**
  * The Class ModeloLibro.
@@ -22,10 +28,12 @@ public class ModeloLibro {
 	private String estado;
 	
 	/** The baja. */
-	private Boolean baja;
+	private BooleanProperty baja;
 	
 	/** The codigo. */
 	private int codigo;
+	
+	private byte[] imagen;
 	
 	/**
 	 * Instantiates a new modelo libro.
@@ -36,13 +44,13 @@ public class ModeloLibro {
 	 * @param estado the estado
 	 * @param baja the baja
 	 */
-	public ModeloLibro(String titulo, String autor, String editorial, String estado, Boolean baja) {
+	public ModeloLibro(String titulo, String autor, String editorial, String estado, int baja) {
 		super();
 		this.titulo = titulo;
 		this.autor = autor;
 		this.editorial = editorial;
 		this.estado = estado;
-		this.baja = baja;
+		this.baja = new SimpleBooleanProperty(baja==1);
 	}
 
 	/**
@@ -122,7 +130,7 @@ public class ModeloLibro {
 	 *
 	 * @return the baja
 	 */
-	public Boolean getBaja() {
+	public BooleanProperty getBaja() {
 		return baja;
 	}
 
@@ -131,7 +139,7 @@ public class ModeloLibro {
 	 *
 	 * @param baja the new baja
 	 */
-	public void setBaja(Boolean baja) {
+	public void setBaja(BooleanProperty baja) {
 		this.baja = baja;
 	}
 
@@ -160,7 +168,34 @@ public class ModeloLibro {
 	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(autor, baja, editorial, estado, titulo);
+		return Objects.hash(autor, editorial, estado, titulo);
+	}
+	
+	/**
+	 * Fijar foto.
+	 *
+	 * @param foto the foto
+	 */
+	public void fijarFoto(InputStream foto) {
+		if(foto!=null) {
+			try {
+				this.imagen=foto.readAllBytes();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Gets the foto stream.
+	 *
+	 * @return the foto stream
+	 */
+	public InputStream getFotoStream() {
+		if(imagen==null) {
+			return null;
+		}
+		return new ByteArrayInputStream(imagen);
 	}
 
 	/**
@@ -178,8 +213,13 @@ public class ModeloLibro {
 		if (getClass() != obj.getClass())
 			return false;
 		ModeloLibro other = (ModeloLibro) obj;
-		return Objects.equals(autor, other.autor) && Objects.equals(baja, other.baja)
+		return Objects.equals(autor, other.autor)
 				&& Objects.equals(editorial, other.editorial) && Objects.equals(estado, other.estado)
 				&& Objects.equals(titulo, other.titulo);
+	}
+	
+	@Override
+	public String toString() {
+		return this.titulo+", "+this.autor+", "+this.editorial;
 	}
 }

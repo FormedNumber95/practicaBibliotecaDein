@@ -64,3 +64,6 @@ CREATE TABLE IF NOT EXISTS `libros`.`Prestamo` (
 
 COMMIT;
 
+ALTER TABLE `libros`.`Libro` ADD `portada` LONGBLOB NULL;
+
+

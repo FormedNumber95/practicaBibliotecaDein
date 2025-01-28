@@ -30,5 +30,35 @@ public class DaoAlumno {
 		}
 		return lst;
 	}
+
+	public static void insertar(String dni, String nombre, String ap1, String ap2) {
+		con=ConexionBBDD.getConnection();
+		String insert="INSERT INTO Alumno (dni, nombre, apellido1, apellido2) VALUES(?, ?, ?, ?);";
+		try {
+			PreparedStatement pstmt=con.prepareStatement(insert);
+			pstmt.setString(1,dni);
+			pstmt.setString(2,nombre);
+			pstmt.setString(3,ap1);
+			pstmt.setString(4,ap2);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void modificar(String dni, String nombre, String ap1, String ap2) {
+		con=ConexionBBDD.getConnection();
+		String update="UPDATE Alumno SET nombre=?, apellido1=?, apellido2=? WHERE dni=?";
+		try {
+			PreparedStatement pstmt=con.prepareStatement(update);
+			pstmt.setString(1,nombre);
+			pstmt.setString(2,ap1);
+			pstmt.setString(3,ap2);
+			pstmt.setString(4,dni);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

@@ -2,9 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -19,6 +21,8 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -52,8 +56,16 @@
                </padding>
             </Label>
             <ComboBox fx:id="cmbEstado" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox fx:id="chkBaja" mnemonicParsing="false" text="%label.baja" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Label text="%label.portada" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+               <padding>
+                  <Insets right="5.0" />
+               </padding>
+            </Label>
+            <Button fx:id="btnSeleccionarImagen" mnemonicParsing="false" onAction="#elegirImagen" text="%label.seleccionarImagen" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
          </children>
       </GridPane>
+      <ImageView fx:id="imgSeleccionada" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="50.0">
          <children>
             <Button fx:id="btnGuardar" defaultButton="true" mnemonicParsing="false" onAction="#accionGuardar" text="%label.guardar" />
