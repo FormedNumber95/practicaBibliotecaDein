@@ -16,6 +16,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TableColumn;
@@ -83,28 +85,36 @@ public class DevolucionesController {
 
     @FXML
     void devolverLibro(ActionEvent event) {
-    	s=new Stage();
-    	Scene scene;
-		try {
-			Properties connConfig =ConexionBBDD.loadProperties() ;
-	        String lang = connConfig.getProperty("language");
-	        Locale locale = new Locale.Builder().setLanguage(lang).build();
-	        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
-			FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/devolverPrestamo.fxml"),bundle);
-			scene = new Scene(controlador.load());
-			s.setTitle("Nuevo Alumno");
-			s.setScene(scene);
-			DevolverPrestamoController controller = controlador.getController();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-        s.setResizable(false);
-        s.initOwner(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.getStage());
-        s.initModality(javafx.stage.Modality.WINDOW_MODAL);
-        s.showAndWait();
-        accionFiltrar(event);
-        tblDevoluciones.refresh();
+    	if (tblDevoluciones.getSelectionModel().getSelectedItem()!=null) {
+	    	s=new Stage();
+	    	Scene scene;
+			try {
+				Properties connConfig =ConexionBBDD.loadProperties() ;
+		        String lang = connConfig.getProperty("language");
+		        Locale locale = new Locale.Builder().setLanguage(lang).build();
+		        ResourceBundle bundle = ResourceBundle.getBundle("idiomas/lang", locale);
+				FXMLLoader controlador = new FXMLLoader(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.class.getResource("/fxml/devolverPrestamo.fxml"),bundle);
+				scene = new Scene(controlador.load());
+				s.setTitle("Devolver libro");
+				s.setScene(scene);
+				DevolverPrestamoController controller = controlador.getController();
+				controller.setTblDevoluciones(tblDevoluciones);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	        s.setResizable(false);
+	        s.initOwner(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.getStage());
+	        s.initModality(javafx.stage.Modality.WINDOW_MODAL);
+	        s.showAndWait();
+	        accionFiltrar(event);
+	        tblDevoluciones.setItems(DaoPrestamo.conseguirListaTodos());
+	        tblDevoluciones.refresh();
+    	}else {
+    		Alert al=new Alert(AlertType.ERROR);
+    		al.setHeaderText(null);
+    		al.setContentText("Para poder devolver un libro primero tienes que seleccionar cual es la devolucion que quieres hacer");
+    		al.showAndWait();
+    	}
     }
 
     @FXML

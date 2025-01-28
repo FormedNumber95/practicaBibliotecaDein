@@ -56,13 +56,16 @@ private static Connection con;
 	public static ModeloLibro conseguirPorCodigo(int codigo){
 		try {
 			con=ConexionBBDD.getConnection();
-			String select="SELECT titulo,autor,editorial,estado,baja,portada FROM Libro where codigo=?";
+			String select="SELECT titulo,autor,editorial,estado,baja,portada FROM Libro where codigo like ?";
 			PreparedStatement pstmt = con.prepareStatement(select);
 			pstmt.setInt(1,codigo);
 			ResultSet rs = pstmt.executeQuery();
-			ModeloLibro l= new ModeloLibro(rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("estado"), rs.getInt("baja"));
-			l.fijarFoto(rs.getBinaryStream("portada"));
-			return l;
+			if(rs.next()) {
+				ModeloLibro l= new ModeloLibro(rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("estado"), rs.getInt("baja"));
+				l.fijarFoto(rs.getBinaryStream("portada"));
+				l.setCodigo(codigo);
+				return l;
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -86,15 +89,15 @@ private static Connection con;
 		}
 	}
 	
-	public static void modificar(String titulo, String autor, String editorial, String edad, int baja,int codigo,InputStream inputStream) {
+	public static void modificar(String titulo, String autor, String editorial, String estado, int baja,int codigo,InputStream inputStream) {
 		con=ConexionBBDD.getConnection();
-		String update="UPDATE Libro SET titulo=?, autor=?, editorial=?,estado=?,baja=?,portada=? WHERE codigo=?";
+		String update="UPDATE Libro SET titulo=?, autor=?, editorial=?,estado=?,baja=?,portada=? WHERE codigo like ?";
 		try {
 			PreparedStatement pstmt=con.prepareStatement(update);
 			pstmt.setString(1,titulo);
 			pstmt.setString(2,autor);
 			pstmt.setString(3,editorial);
-			pstmt.setString(4,edad);
+			pstmt.setString(4,estado);
 			pstmt.setInt(5, baja);
 			pstmt.setBinaryStream(6,inputStream);
 			pstmt.setInt(7,codigo);

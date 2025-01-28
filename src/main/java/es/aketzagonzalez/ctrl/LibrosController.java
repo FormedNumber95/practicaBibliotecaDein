@@ -140,6 +140,7 @@ public class LibrosController {
     		l.setBaja(new SimpleBooleanProperty(true));
     		DaoLibro.modificar(l.getTitulo(), l.getAutor(), l.getEditorial(), l.getEstado(), 1, l.getCodigo(),l.getFotoStream());
     		accionFiltrar(event);
+    		tblLibros.setItems(DaoLibro.conseguirListaTodosNoBaja());
 	        tblLibros.refresh();
     	}
     }
