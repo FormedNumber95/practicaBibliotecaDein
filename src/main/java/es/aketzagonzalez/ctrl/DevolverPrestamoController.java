@@ -13,24 +13,45 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 
+/**
+ * The Class DevolverPrestamoController.
+ * @author Aketza
+ * @version 1.0
+ */
 public class DevolverPrestamoController {
 
+    /** The btn cancelar. */
     @FXML
     private Button btnCancelar;
 
+    /** The btn guardar. */
     @FXML
     private Button btnGuardar;
 
+    /** The cmb estado. */
     @FXML
     private ComboBox<String> cmbEstado;
     
+    /** The tbl devoluciones. */
     private TableView<ModeloPrestamo> tblDevoluciones;
 
+    /**
+     * Accion cancelar.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void accionCancelar(ActionEvent event) {
     	DevolucionesController.getS().close();
     }
 
+    /**
+     * Accion guardar.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void accionGuardar(ActionEvent event) {
     	ModeloLibro l=DaoLibro.conseguirPorCodigo(Integer.parseInt(tblDevoluciones.getSelectionModel().getSelectedItem().getCodLibro()));
@@ -46,6 +67,7 @@ public class DevolverPrestamoController {
     
     /**
      * Initialize.
+     * @author Aketza
      */
     @FXML
     private void initialize() {
@@ -53,6 +75,12 @@ public class DevolverPrestamoController {
     	cmbEstado.getSelectionModel().select(0);
     }
     
+    /**
+     * Sets the tbl devoluciones.
+     *
+     * @param tblDevoluciones the new tbl devoluciones
+     * @author Aketza
+     */
     public void setTblDevoluciones(TableView<ModeloPrestamo> tblDevoluciones) {
 		this.tblDevoluciones = tblDevoluciones;
 	}

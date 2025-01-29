@@ -33,6 +33,7 @@ public class ModeloLibro {
 	/** The codigo. */
 	private int codigo;
 	
+	/** The imagen. */
 	private byte[] imagen;
 	
 	/**
@@ -43,6 +44,7 @@ public class ModeloLibro {
 	 * @param editorial the editorial
 	 * @param estado the estado
 	 * @param baja the baja
+	 * @author Aketza
 	 */
 	public ModeloLibro(String titulo, String autor, String editorial, String estado, int baja) {
 		super();
@@ -57,6 +59,7 @@ public class ModeloLibro {
 	 * Gets the titulo.
 	 *
 	 * @return the titulo
+	 * @author Aketza
 	 */
 	public String getTitulo() {
 		return titulo;
@@ -66,6 +69,7 @@ public class ModeloLibro {
 	 * Sets the titulo.
 	 *
 	 * @param titulo the new titulo
+	 * @author Aketza
 	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
@@ -75,6 +79,7 @@ public class ModeloLibro {
 	 * Gets the autor.
 	 *
 	 * @return the autor
+	 * @author Aketza
 	 */
 	public String getAutor() {
 		return autor;
@@ -84,6 +89,7 @@ public class ModeloLibro {
 	 * Sets the autor.
 	 *
 	 * @param autor the new autor
+	 * @author Aketza
 	 */
 	public void setAutor(String autor) {
 		this.autor = autor;
@@ -93,6 +99,7 @@ public class ModeloLibro {
 	 * Gets the editorial.
 	 *
 	 * @return the editorial
+	 * @author Aketza
 	 */
 	public String getEditorial() {
 		return editorial;
@@ -102,6 +109,7 @@ public class ModeloLibro {
 	 * Sets the editorial.
 	 *
 	 * @param editorial the new editorial
+	 * @author Aketza
 	 */
 	public void setEditorial(String editorial) {
 		this.editorial = editorial;
@@ -111,6 +119,7 @@ public class ModeloLibro {
 	 * Gets the estado.
 	 *
 	 * @return the estado
+	 * @author Aketza
 	 */
 	public String getEstado() {
 		return estado;
@@ -120,6 +129,7 @@ public class ModeloLibro {
 	 * Sets the estado.
 	 *
 	 * @param estado the new estado
+	 * @author Aketza
 	 */
 	public void setEstado(String estado) {
 		this.estado = estado;
@@ -129,6 +139,7 @@ public class ModeloLibro {
 	 * Gets the baja.
 	 *
 	 * @return the baja
+	 * @author Aketza
 	 */
 	public BooleanProperty getBaja() {
 		return baja;
@@ -138,6 +149,7 @@ public class ModeloLibro {
 	 * Sets the baja.
 	 *
 	 * @param baja the new baja
+	 * @author Aketza
 	 */
 	public void setBaja(BooleanProperty baja) {
 		this.baja = baja;
@@ -147,6 +159,7 @@ public class ModeloLibro {
 	 * Gets the codigo.
 	 *
 	 * @return the codigo
+	 * @author Aketza
 	 */
 	public int getCodigo() {
 		return codigo;
@@ -156,6 +169,7 @@ public class ModeloLibro {
 	 * Sets the codigo.
 	 *
 	 * @param codigo the new codigo
+	 * @author Aketza
 	 */
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
@@ -165,6 +179,7 @@ public class ModeloLibro {
 	 * Hash code.
 	 *
 	 * @return the int
+	 * @author Aketza
 	 */
 	@Override
 	public int hashCode() {
@@ -175,6 +190,7 @@ public class ModeloLibro {
 	 * Fijar foto.
 	 *
 	 * @param foto the foto
+	 * @author Aketza
 	 */
 	public void fijarFoto(InputStream foto) {
 		if(foto!=null) {
@@ -190,6 +206,7 @@ public class ModeloLibro {
 	 * Gets the foto stream.
 	 *
 	 * @return the foto stream
+	 * @author Aketza
 	 */
 	public InputStream getFotoStream() {
 		if(imagen==null) {
@@ -203,6 +220,7 @@ public class ModeloLibro {
 	 *
 	 * @param obj the obj
 	 * @return true, if successful
+	 * @author Aketza
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -218,6 +236,12 @@ public class ModeloLibro {
 				&& Objects.equals(titulo, other.titulo);
 	}
 	
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 * @author Aketza
+	 */
 	@Override
 	public String toString() {
 		return this.titulo+", "+this.autor+", "+this.editorial;

@@ -7,10 +7,8 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import es.aketzagonzalez.dao.DaoAlumno;
 import es.aketzagonzalez.dao.DaoLibro;
 import es.aketzagonzalez.db.ConexionBBDD;
-import es.aketzagonzalez.model.ModeloAlumno;
 import es.aketzagonzalez.model.ModeloLibro;
 import es.aketzagonzalez.utilidad.Navegador;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -32,70 +30,103 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+/**
+ * The Class LibrosController.
+ * @author Aketza
+ * @version 1.0
+ */
 public class LibrosController {
 
+    /** The btn alumnos. */
     @FXML
     private Button btnAlumnos;
 
+    /** The btn aniadir. */
     @FXML
     private Button btnAniadir;
 
+    /** The btn baja. */
     @FXML
     private Button btnBaja;
 
+    /** The btn devoluciones. */
     @FXML
     private Button btnDevoluciones;
 
+    /** The btn informes. */
     @FXML
     private Button btnInformes;
 
+    /** The btn libros. */
     @FXML
     private Button btnLibros;
 
+    /** The btn modificar. */
     @FXML
     private Button btnModificar;
 
+    /** The btn prestamos. */
     @FXML
     private Button btnPrestamos;
     
+    /** The col autor. */
     @FXML
     private TableColumn<ModeloLibro, String> colAutor;
 
+    /** The col baja. */
     @FXML
     private TableColumn<ModeloLibro, Boolean> colBaja;
 
+    /** The col cod. */
     @FXML
     private TableColumn<ModeloLibro, Integer> colCod;
 
+    /** The col editorial. */
     @FXML
     private TableColumn<ModeloLibro, String> colEditorial;
 
+    /** The col estado. */
     @FXML
     private TableColumn<ModeloLibro, String> colEstado;
 
+    /** The col titulo. */
     @FXML
     private TableColumn<ModeloLibro, String> colTitulo;
     
+    /** The col portada. */
     @FXML
     private TableColumn<ModeloLibro, ImageView> colPortada;
     
+    /** The tbl libros. */
     @FXML
     private TableView<ModeloLibro> tblLibros;
 
+    /** The men ayuda. */
     @FXML
     private Menu menAyuda;
 
+    /** The txt filtro. */
     @FXML
     private TextField txtFiltro;
     
+    /** The filtro. */
     private FilteredList<ModeloLibro> filtro;
     
+    /** The s. */
     private static Stage s;
     
+    /** The lista todas. */
     private static ObservableList<ModeloLibro> listaTodas;
     
+    /** The es aniadir. */
     private static boolean esAniadir;
 
+    /**
+     * Accion filtrar.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void accionFiltrar(ActionEvent event) {
     	tblLibros.setItems(filtro);
@@ -106,6 +137,12 @@ public class LibrosController {
     	}
     }
 
+    /**
+     * Aniadir libro.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void aniadirLibro(ActionEvent event) {
     	esAniadir=true;
@@ -120,8 +157,6 @@ public class LibrosController {
 			scene = new Scene(controlador.load());
 			s.setTitle("Nuevo Libro");
 			s.setScene(scene);
-			AniadirLibroController controller = controlador.getController();
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -133,6 +168,12 @@ public class LibrosController {
         tblLibros.refresh();
     }
 
+    /**
+     * Dar de baja.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void darDeBaja(ActionEvent event) {
     	if(tblLibros.getSelectionModel().getSelectedItem()!=null) {
@@ -145,6 +186,12 @@ public class LibrosController {
     	}
     }
 
+    /**
+     * Modificar libro.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void modificarLibro(ActionEvent event) {
     	esAniadir=false;
@@ -179,6 +226,12 @@ public class LibrosController {
     	}
     }
 
+    /**
+     * Ver alumnos.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void verAlumnos(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -188,11 +241,23 @@ public class LibrosController {
         Navegador.cargarVista("alumnos", bundle);
     }
 
+    /**
+     * Ver ayuda.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void verAyuda(ActionEvent event) {
 
     }
 
+    /**
+     * Ver devoluciones.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void verDevoluciones(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -202,6 +267,12 @@ public class LibrosController {
         Navegador.cargarVista("devoluciones", bundle);
     }
 
+    /**
+     * Ver informes.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void verInformes(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -211,11 +282,23 @@ public class LibrosController {
         Navegador.cargarVista("informes", bundle);
     }
 
+    /**
+     * Ver libros, vacio pero necesario para evitar errores.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void verLibros(ActionEvent event) {
 
     }
 
+    /**
+     * Ver prestamos.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void verPrestamos(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -227,6 +310,7 @@ public class LibrosController {
     
     /**
      * Initialize.
+     * @author Aketza
      */
     @FXML
     private void initialize() {
@@ -251,6 +335,7 @@ public class LibrosController {
      * @param url the url
      * @return the imagen input stream
      * @throws IOException Signals that an I/O exception has occurred.
+     * @author Aketza
      */
     public static InputStream getImagenInputStream(URL url) throws IOException {
         if (url == null) {
@@ -264,6 +349,7 @@ public class LibrosController {
      *
      * @param fotoStream the foto stream
      * @return the image view
+     * @author Aketza
      */
     private ImageView convertirBytesAImageView(InputStream fotoStream) {
         if (fotoStream == null) {
@@ -276,14 +362,32 @@ public class LibrosController {
         return imageView;
     }
     
+    /**
+     * Gets the s.
+     *
+     * @return the s
+     * @author Aketza
+     */
     public static Stage getS() {
 		return s;
 	}
     
+    /**
+     * Checks if is es aniadir.
+     *
+     * @return true, if is es aniadir
+     * @author Aketza
+     */
     public static boolean isEsAniadir() {
 		return esAniadir;
 	}
     
+    /**
+     * Sets the lista todas.
+     *
+     * @param listaTodas the new lista todas
+     * @author Aketza
+     */
     public static void setListaTodas(ObservableList<ModeloLibro> listaTodas) {
 		LibrosController.listaTodas = listaTodas;
 	}

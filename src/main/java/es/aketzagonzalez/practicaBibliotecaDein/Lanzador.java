@@ -1,9 +1,6 @@
 package es.aketzagonzalez.practicaBibliotecaDein;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -17,10 +14,23 @@ import java.util.ResourceBundle;
 import es.aketzagonzalez.db.ConexionBBDD;
 import es.aketzagonzalez.utilidad.Navegador;
 
-
+/**
+ * The Class Lanzador.
+ * @author Aketza
+ * @version 1.0
+ */
 public class Lanzador extends Application {
+    
+    /** The stage. */
     private static Stage stage;
 
+    /**
+     * Start.
+     *
+     * @param s the s
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @author Aketza
+     */
     @Override
     public void start(@SuppressWarnings("exports") Stage s) throws IOException {
     	Navegador.setStage(s);
@@ -31,7 +41,7 @@ public class Lanzador extends Application {
         stage=s;
         stage.setResizable(false);
         try {
-			ConexionBBDD db=new ConexionBBDD();
+			new ConexionBBDD();
 			Navegador.cargarVista("alumnos", bundle);
 			stage.show();
 		} catch (SQLException e) {
@@ -42,10 +52,22 @@ public class Lanzador extends Application {
 		}
     }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     * @author Aketza
+     */
     public static void main(String[] args) {
         launch(args);
     }
     
+    /**
+     * Gets the stage.
+     *
+     * @return the stage
+     * @author Aketza
+     */
     public static Stage getStage() {
 		return stage;
 	}

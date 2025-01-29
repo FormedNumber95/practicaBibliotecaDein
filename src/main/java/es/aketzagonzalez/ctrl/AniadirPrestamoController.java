@@ -27,25 +27,46 @@ import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 import javafx.scene.control.Alert.AlertType;
 
+/**
+ * The Class AniadirPrestamoController.
+ * @author Aketza
+ * @version 1.0
+ */
 public class AniadirPrestamoController {
 
+    /** The btn cancelar. */
     @FXML
     private Button btnCancelar;
 
+    /** The btn guardar. */
     @FXML
     private Button btnGuardar;
 
+    /** The cmb alumno. */
     @FXML
     private ComboBox<ModeloAlumno> cmbAlumno;
 
+    /** The cmb libro. */
     @FXML
     private ComboBox<ModeloLibro> cmbLibro;
 
+    /**
+     * Accion cancelar.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void accionCancelar(ActionEvent event) {
     	PrestamosController.getS().close();
     }
 
+    /**
+     * Accion guardar.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void accionGuardar(ActionEvent event) {
     	ModeloLibro l=cmbLibro.getSelectionModel().getSelectedItem();
@@ -88,6 +109,7 @@ public class AniadirPrestamoController {
     
     /**
      * Initialize.
+     * @author Aketza
      */
     @FXML
     private void initialize() {

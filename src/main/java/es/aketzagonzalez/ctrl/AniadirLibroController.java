@@ -9,7 +9,6 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import es.aketzagonzalez.dao.DaoAlumno;
 import es.aketzagonzalez.dao.DaoLibro;
 import es.aketzagonzalez.model.ModeloLibro;
 import javafx.event.ActionEvent;
@@ -27,42 +26,69 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.WritablePixelFormat;
 import javafx.stage.FileChooser;
 
+/**
+ * The Class AniadirLibroController.
+ * @author Aketza
+ * @version 1.0
+ */
 public class AniadirLibroController {
 
+    /** The btn cancelar. */
     @FXML
     private Button btnCancelar;
 
+    /** The btn guardar. */
     @FXML
     private Button btnGuardar;
     
+    /** The btn seleccionar imagen. */
     @FXML
     private Button btnSeleccionarImagen;
 
+    /** The cmb estado. */
     @FXML
     private ComboBox<String> cmbEstado;
 
+    /** The txt autor. */
     @FXML
     private TextField txtAutor;
 
+    /** The txt editorial. */
     @FXML
     private TextField txtEditorial;
 
+    /** The txt titulo. */
     @FXML
     private TextField txtTitulo;
     
+    /** The img seleccionada. */
     @FXML
     private ImageView imgSeleccionada;
     
+    /** The chk baja. */
     @FXML
     private CheckBox chkBaja;
     
+    /** The codigo. */
     private int codigo;
 
+    /**
+     * Accion cancelar.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void accionCancelar(ActionEvent event) {
     	LibrosController.getS().close();
     }
 
+    /**
+     * Accion guardar.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void accionGuardar(ActionEvent event) {
     	String error="";
@@ -118,6 +144,16 @@ public class AniadirLibroController {
     	LibrosController.getS().close();
     }
     
+    /**
+     * Validar existencia del libro.
+     *
+     * @param titulo the titulo
+     * @param autor the autor
+     * @param editorial the editorial
+     * @param estado the estado
+     * @return true, if successful
+     * @author Aketza
+     */
     private boolean validarExistencia(String titulo, String autor, String editorial, String estado) {
 		ModeloLibro lib=new ModeloLibro(titulo, autor, editorial, estado, 0);
 		for(ModeloLibro l:DaoLibro.conseguirListaTodos()) {
@@ -128,6 +164,12 @@ public class AniadirLibroController {
 		return false;
 	}
     
+    /**
+     * Elegir imagen.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void elegirImagen(ActionEvent event) {
     	 FileChooser fileChooser = new FileChooser();
@@ -147,6 +189,7 @@ public class AniadirLibroController {
      *
      * @param imageView the image view
      * @return the image input stream
+     * @author Aketza
      */
     public static InputStream getImageInputStream(ImageView imageView) {
         Image image = imageView.getImage();
@@ -186,6 +229,7 @@ public class AniadirLibroController {
 
 	/**
      * Initialize.
+     * @author Aketza
      */
     @FXML
     private void initialize() {
@@ -200,22 +244,52 @@ public class AniadirLibroController {
     	}
     }
     
+	/**
+	 * Gets the chk baja.
+	 *
+	 * @return the chk baja
+	 * @author Aketza
+	 */
 	public CheckBox getChkBaja() {
 		return chkBaja;
 	}
 	
+	/**
+	 * Gets the txt titulo.
+	 *
+	 * @return the txt titulo
+	 * @author Aketza
+	 */
 	public TextField getTxtTitulo() {
 		return txtTitulo;
 	}
 	
+	/**
+	 * Gets the txt autor.
+	 *
+	 * @return the txt autor
+	 * @author Aketza
+	 */
 	public TextField getTxtAutor() {
 		return txtAutor;
 	}
 	
+	/**
+	 * Gets the txt editorial.
+	 *
+	 * @return the txt editorial
+	 * @author Aketza
+	 */
 	public TextField getTxtEditorial() {
 		return txtEditorial;
 	}
     
+    /**
+     * Sets the codigo.
+     *
+     * @param codigo the new codigo
+     * @author Aketza
+     */
     public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}

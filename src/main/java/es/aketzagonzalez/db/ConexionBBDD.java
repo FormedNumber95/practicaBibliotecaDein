@@ -10,6 +10,8 @@ import java.util.Properties;
 
 /**
  * Clase ConexionBBDD.
+ * @author Aketza
+ * @version 1.0
  */
 public class ConexionBBDD {
 	
@@ -20,6 +22,7 @@ public class ConexionBBDD {
 	 * Constructor sin paramentros.
 	 *
 	 * @throws SQLException the SQL exception
+	 * @author Aketza
 	 */
 	public ConexionBBDD() throws SQLException {
 		 Properties connConfig =loadProperties() ;
@@ -45,6 +48,7 @@ public class ConexionBBDD {
 	 * Getter de connection.
 	 *
 	 * @return the connection
+	 * @author Aketza
 	 */
 	public static Connection getConnection() {
 		return connection;
@@ -55,6 +59,7 @@ public class ConexionBBDD {
 	 *
 	 * @return the connection
 	 * @throws SQLException the SQL exception
+	 * @author Aketza
 	 */
 	public Connection CloseConexion() throws SQLException{
 		connection.close();
@@ -65,6 +70,7 @@ public class ConexionBBDD {
 	 * Carga las propiedades del archivo db.properties.
 	 *
 	 * @return the properties
+	 * @author Aketza
 	 */
 	public static Properties loadProperties() {
 		try (FileInputStream fs = new FileInputStream("configuration.properties")) {

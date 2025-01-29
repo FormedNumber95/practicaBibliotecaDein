@@ -11,10 +11,22 @@ import es.aketzagonzalez.model.ModeloLibro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * The Class DaoLibro.
+ * @author Aketza
+ * @version 1.0
+ */
 public class DaoLibro {
 
+/** The con. */
 private static Connection con;
 	
+	/**
+	 * Conseguir lista todos.
+	 *
+	 * @return the observable list
+	 * @author Aketza
+	 */
 	public static ObservableList<ModeloLibro> conseguirListaTodos(){
 		ObservableList<ModeloLibro>lst=FXCollections.observableArrayList();
 		try {
@@ -34,6 +46,12 @@ private static Connection con;
 		return lst;
 	}
 	
+	/**
+	 * Conseguir lista todos no baja.
+	 *
+	 * @return the observable list
+	 * @author Aketza
+	 */
 	public static ObservableList<ModeloLibro> conseguirListaTodosNoBaja(){
 		ObservableList<ModeloLibro>lst=FXCollections.observableArrayList();
 		try {
@@ -53,6 +71,13 @@ private static Connection con;
 		return lst;
 	}
 	
+	/**
+	 * Conseguir por codigo.
+	 *
+	 * @param codigo the codigo
+	 * @return the modelo libro
+	 * @author Aketza
+	 */
 	public static ModeloLibro conseguirPorCodigo(int codigo){
 		try {
 			con=ConexionBBDD.getConnection();
@@ -72,6 +97,17 @@ private static Connection con;
 		return null;
 	}
 	
+	/**
+	 * Insertar.
+	 *
+	 * @param titulo the titulo
+	 * @param autor the autor
+	 * @param editorial the editorial
+	 * @param edad the edad
+	 * @param baja the baja
+	 * @param inputStream the input stream
+	 * @author Aketza
+	 */
 	public static void insertar(String titulo, String autor, String editorial, String edad, int baja,InputStream inputStream) {
 		con=ConexionBBDD.getConnection();
 		String insert="INSERT INTO Libro (titulo, autor, editorial, estado, baja,portada) VALUES(?, ?, ?, ?, ?,?);";
@@ -89,6 +125,18 @@ private static Connection con;
 		}
 	}
 	
+	/**
+	 * Modificar.
+	 *
+	 * @param titulo the titulo
+	 * @param autor the autor
+	 * @param editorial the editorial
+	 * @param estado the estado
+	 * @param baja the baja
+	 * @param codigo the codigo
+	 * @param inputStream the input stream
+	 * @author Aketza
+	 */
 	public static void modificar(String titulo, String autor, String editorial, String estado, int baja,int codigo,InputStream inputStream) {
 		con=ConexionBBDD.getConnection();
 		String update="UPDATE Libro SET titulo=?, autor=?, editorial=?,estado=?,baja=?,portada=? WHERE codigo like ?";

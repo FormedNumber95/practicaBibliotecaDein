@@ -2,7 +2,6 @@ package es.aketzagonzalez.model;
 
 import java.util.Objects;
 
-
 /**
  * The Class ModeloAlumno.
  * @author Aketza
@@ -29,6 +28,7 @@ public class ModeloAlumno {
 	 * @param nombre the nombre
 	 * @param priemrApellido the priemr apellido
 	 * @param segundoApellido the segundo apellido
+	 * @author Aketza
 	 */
 	public ModeloAlumno(String dni, String nombre, String priemrApellido, String segundoApellido) {
 		this.dni = dni;
@@ -41,6 +41,7 @@ public class ModeloAlumno {
 	 * Gets the dni.
 	 *
 	 * @return the dni
+	 * @author Aketza
 	 */
 	public String getDni() {
 		return dni;
@@ -50,6 +51,7 @@ public class ModeloAlumno {
 	 * Sets the dni.
 	 *
 	 * @param dni the new dni
+	 * @author Aketza
 	 */
 	public void setDni(String dni) {
 		this.dni = dni;
@@ -59,6 +61,7 @@ public class ModeloAlumno {
 	 * Gets the nombre.
 	 *
 	 * @return the nombre
+	 * @author Aketza
 	 */
 	public String getNombre() {
 		return nombre;
@@ -68,6 +71,7 @@ public class ModeloAlumno {
 	 * Sets the nombre.
 	 *
 	 * @param nombre the new nombre
+	 * @author Aketza
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -77,6 +81,7 @@ public class ModeloAlumno {
 	 * Gets the priemr apellido.
 	 *
 	 * @return the priemr apellido
+	 * @author Aketza
 	 */
 	public String getPriemrApellido() {
 		return priemrApellido;
@@ -86,6 +91,7 @@ public class ModeloAlumno {
 	 * Sets the priemr apellido.
 	 *
 	 * @param priemrApellido the new priemr apellido
+	 * @author Aketza
 	 */
 	public void setPriemrApellido(String priemrApellido) {
 		this.priemrApellido = priemrApellido;
@@ -95,6 +101,7 @@ public class ModeloAlumno {
 	 * Gets the segundo apellido.
 	 *
 	 * @return the segundo apellido
+	 * @author Aketza
 	 */
 	public String getSegundoApellido() {
 		return segundoApellido;
@@ -104,6 +111,7 @@ public class ModeloAlumno {
 	 * Sets the segundo apellido.
 	 *
 	 * @param segundoApellido the new segundo apellido
+	 * @author Aketza
 	 */
 	public void setSegundoApellido(String segundoApellido) {
 		this.segundoApellido = segundoApellido;
@@ -113,6 +121,7 @@ public class ModeloAlumno {
 	 * Hash code.
 	 *
 	 * @return the int
+	 * @author Aketza
 	 */
 	@Override
 	public int hashCode() {
@@ -124,6 +133,7 @@ public class ModeloAlumno {
 	 *
 	 * @param obj the obj
 	 * @return true, if successful
+	 * @author Aketza
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -137,6 +147,12 @@ public class ModeloAlumno {
 		return Objects.equals(dni, other.dni);
 	}
 	
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 * @author Aketza
+	 */
 	@Override
 	public String toString() {
 		return this.nombre+" "+this.priemrApellido+" "+this.segundoApellido;

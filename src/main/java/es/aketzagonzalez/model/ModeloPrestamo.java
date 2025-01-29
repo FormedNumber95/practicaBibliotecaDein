@@ -28,6 +28,7 @@ public class ModeloPrestamo {
 	 * @param dni the dni
 	 * @param codLibro the cod libro
 	 * @param fechaPrestamo the fecha prestamo
+	 * @author Aketza
 	 */
 	public ModeloPrestamo(String dni, String codLibro, Date fechaPrestamo) {
 		super();
@@ -40,6 +41,7 @@ public class ModeloPrestamo {
 	 * Gets the codigo.
 	 *
 	 * @return the codigo
+	 * @author Aketza
 	 */
 	public int getCodigo() {
 		return codigo;
@@ -49,6 +51,7 @@ public class ModeloPrestamo {
 	 * Sets the codigo.
 	 *
 	 * @param codigo the new codigo
+	 * @author Aketza
 	 */
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
@@ -58,6 +61,7 @@ public class ModeloPrestamo {
 	 * Gets the dni.
 	 *
 	 * @return the dni
+	 * @author Aketza
 	 */
 	public String getDni() {
 		return dni;
@@ -67,6 +71,7 @@ public class ModeloPrestamo {
 	 * Sets the dni.
 	 *
 	 * @param dni the new dni
+	 * @author Aketza
 	 */
 	public void setDni(String dni) {
 		this.dni = dni;
@@ -76,6 +81,7 @@ public class ModeloPrestamo {
 	 * Gets the cod libro.
 	 *
 	 * @return the cod libro
+	 * @author Aketza
 	 */
 	public String getCodLibro() {
 		return codLibro;
@@ -85,6 +91,7 @@ public class ModeloPrestamo {
 	 * Sets the cod libro.
 	 *
 	 * @param codLibro the new cod libro
+	 * @author Aketza
 	 */
 	public void setCodLibro(String codLibro) {
 		this.codLibro = codLibro;
@@ -94,6 +101,7 @@ public class ModeloPrestamo {
 	 * Gets the fecha prestamo.
 	 *
 	 * @return the fecha prestamo
+	 * @author Aketza
 	 */
 	public Date getFechaPrestamo() {
 		return fechaPrestamo;
@@ -103,6 +111,7 @@ public class ModeloPrestamo {
 	 * Sets the fecha prestamo.
 	 *
 	 * @param fechaPrestamo the new fecha prestamo
+	 * @author Aketza
 	 */
 	public void setFechaPrestamo(Date fechaPrestamo) {
 		this.fechaPrestamo = fechaPrestamo;
@@ -112,6 +121,7 @@ public class ModeloPrestamo {
 	 * Hash code.
 	 *
 	 * @return the int
+	 * @author Aketza
 	 */
 	@Override
 	public int hashCode() {
@@ -123,6 +133,7 @@ public class ModeloPrestamo {
 	 *
 	 * @param obj the obj
 	 * @return true, if successful
+	 * @author Aketza
 	 */
 	@Override
 	public boolean equals(Object obj) {

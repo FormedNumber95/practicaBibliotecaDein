@@ -10,10 +10,22 @@ import es.aketzagonzalez.model.ModeloAlumno;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * The Class DaoAlumno.
+ * @author Aketza
+ * @version 1.0
+ */
 public class DaoAlumno {
 
+	/** The con. */
 	private static Connection con;
 	
+	/**
+	 * Conseguir lista todos.
+	 *
+	 * @return the observable list
+	 * @author Aketza
+	 */
 	public static ObservableList<ModeloAlumno> conseguirListaTodos(){
 		ObservableList<ModeloAlumno>lst=FXCollections.observableArrayList();
 		try {
@@ -31,6 +43,13 @@ public class DaoAlumno {
 		return lst;
 	}
 	
+	/**
+	 * Conseguir por dni.
+	 *
+	 * @param dni the dni
+	 * @return the modelo alumno
+	 * @author Aketza
+	 */
 	public static ModeloAlumno conseguirPorDni(String dni){
 		try {
 			con=ConexionBBDD.getConnection();
@@ -48,6 +67,15 @@ public class DaoAlumno {
 		return null;
 	}
 
+	/**
+	 * Insertar.
+	 *
+	 * @param dni the dni
+	 * @param nombre the nombre
+	 * @param ap1 the ap 1
+	 * @param ap2 the ap 2
+	 * @author Aketza
+	 */
 	public static void insertar(String dni, String nombre, String ap1, String ap2) {
 		con=ConexionBBDD.getConnection();
 		String insert="INSERT INTO Alumno (dni, nombre, apellido1, apellido2) VALUES(?, ?, ?, ?);";
@@ -63,6 +91,15 @@ public class DaoAlumno {
 		}
 	}
 
+	/**
+	 * Modificar.
+	 *
+	 * @param dni the dni
+	 * @param nombre the nombre
+	 * @param ap1 the ap 1
+	 * @param ap2 the ap 2
+	 * @author Aketza
+	 */
 	public static void modificar(String dni, String nombre, String ap1, String ap2) {
 		con=ConexionBBDD.getConnection();
 		String update="UPDATE Alumno SET nombre=?, apellido1=?, apellido2=? WHERE dni=?";
