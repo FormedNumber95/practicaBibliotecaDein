@@ -1,0 +1,32 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="prestamosPorFecha" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9590b9dd-8c25-438a-817f-e002eb51d2a2">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionMariaIntento2"/>
+	<query language="SQL"><![CDATA[SELECT 
+    DATE(fecha_prestamo) AS fecha,
+    COUNT(*) AS prestamos
+FROM libros.Historico_prestamo
+GROUP BY fecha
+ORDER BY fecha]]></query>
+	<field name="fecha" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
+	</field>
+	<field name="prestamos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="prestamos"/>
+		<property name="com.jaspersoft.studio.field.label" value="prestamos"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="210" splitType="Stretch">
+		<element kind="chart" chartType="line" uuid="19555d32-0891-4384-b11f-2b9615b0265c" x="120" y="5" width="200" height="200" evaluationTime="Report">
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA["Prestamos realizados"]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{fecha}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{prestamos}]]></valueExpression>
+				</series>
+			</dataset>
+			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000"/>
+		</element>
+	</title>
+</jasperReport>

@@ -77,7 +77,20 @@ public class InformesController {
 
     @FXML
     void mostarGraficos(ActionEvent event) {
-
+    	try {
+    		ConexionBBDD db=new ConexionBBDD();
+			InputStream reportStream =getClass().getResourceAsStream("/jasper/reportGraficos.jasper");
+            JasperReport report = (JasperReport) JRLoader.loadObject(reportStream);
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("Resource_Path", db.getClass().getResource("/jasper/").toString());
+            JasperPrint jprint = JasperFillManager.fillReport(report, parameters,  ConexionBBDD.getConnection());
+            JasperViewer viewer = new JasperViewer(jprint, false);
+            viewer.setVisible(true);
+    	} catch (JRException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML

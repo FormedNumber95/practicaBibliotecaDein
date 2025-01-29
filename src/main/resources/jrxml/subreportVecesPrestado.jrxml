@@ -1,0 +1,44 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="subreportVecesPrestado" language="java" columnCount="1" pageWidth="595" pageHeight="400" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="96803b7b-a577-418e-88e5-73fb5e65928f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionMariaIntento2"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<query language="SQL"><![CDATA[SELECT  libro.titulo,
+       COUNT(*) AS Veces
+FROM libros.Historico_prestamo AS hp
+JOIN libros.`Libro` AS libro
+  ON hp.codigo_libro = libro.codigo
+GROUP BY libro.titulo]]></query>
+	<field name="titulo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.label" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="Veces" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="Veces"/>
+		<property name="com.jaspersoft.studio.field.label" value="Veces"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="230" splitType="Stretch">
+		<element kind="chart" chartType="bar" uuid="906a18ae-94e8-4c5c-9f65-4f226899913c" x="0" y="0" width="544" height="200" evaluationTime="Report">
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{titulo}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{Veces}]]></valueExpression>
+				</series>
+			</dataset>
+			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+				<itemLabel/>
+			</plot>
+		</element>
+	</title>
+</jasperReport>

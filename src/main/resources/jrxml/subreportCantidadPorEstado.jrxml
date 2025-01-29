@@ -1,0 +1,33 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="subreportCantidadPorEstado" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="54bba19d-787d-4a6c-b2f0-f52508362d6b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionMariaIntento2"/>
+	<query language="SQL"><![CDATA[SELECT estado,
+	count( titulo)
+FROM libros.`Libro`
+GROUP BY libros.`Libro`.estado]]></query>
+	<field name="estado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="estado"/>
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="count( titulo)" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="count( titulo)"/>
+		<property name="com.jaspersoft.studio.field.label" value="count( titulo)"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="210" splitType="Stretch">
+		<element kind="chart" chartType="pie" uuid="93c15bb1-7ac1-43d9-8885-cf8c32dbefda" x="30" y="10" width="515" height="190" evaluationTime="Report">
+			<dataset kind="pie">
+				<series>
+					<keyExpression><![CDATA[$F{estado}]]></keyExpression>
+					<valueExpression><![CDATA[$F{count( titulo)}]]></valueExpression>
+					<labelExpression><![CDATA[$F{count( titulo)}+""]]></labelExpression>
+				</series>
+			</dataset>
+			<plot>
+				<itemLabel/>
+			</plot>
+		</element>
+	</title>
+</jasperReport>
