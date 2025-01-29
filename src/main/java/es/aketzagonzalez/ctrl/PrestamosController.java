@@ -20,9 +20,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -65,10 +67,25 @@ public class PrestamosController {
     private TableView<ModeloHistoricoPrestamos> tblHistorico;
 
     @FXML
+    private ToggleGroup grupoDevueltos;
+    
+    @FXML
     private Menu menAyuda;
+    
+    @FXML
+    private RadioButton radDevueltos;
+
+    @FXML
+    private RadioButton radPendientes;
+
+    @FXML
+    private RadioButton radTodos;
 
     @FXML
     private TextField txtFiltro;
+    
+    @FXML
+    private TextField txtFiltroDni;
     
     private FilteredList<ModeloHistoricoPrestamos> filtro;
     
@@ -78,13 +95,21 @@ public class PrestamosController {
 
     @FXML
     void accionFiltrar(ActionEvent event) {
-    	tblHistorico.setItems(filtro);
-    	if(txtFiltro.getText().isEmpty()){
-    		tblHistorico.setItems(listaTodas);
-    	}else {
-    		filtro.setPredicate(observacion -> observacion.getCodLibro().contains(txtFiltro.getText()));
-    	}
+        tblHistorico.setItems(filtro);
+        
+        if (txtFiltro.getText().isEmpty() && txtFiltroDni.getText().isEmpty()) {
+            tblHistorico.setItems(listaTodas);
+        } else {
+            String filtroCodLibro = txtFiltro.getText().trim();
+            String filtroDni = txtFiltroDni.getText().trim();
+            filtro.setPredicate(observacion -> {
+                boolean coincideCodLibro = filtroCodLibro.isEmpty() || observacion.getCodLibro().contains(filtroCodLibro);
+                boolean coincideDni = filtroDni.isEmpty() || observacion.getDni().contains(filtroDni);
+                return coincideCodLibro && coincideDni;
+            });
+        }
     }
+
 
     @FXML
     void aniadirPrestamo(ActionEvent event) {
@@ -157,6 +182,33 @@ public class PrestamosController {
     @FXML
     void verPrestamos(ActionEvent event) {
 
+    }
+    
+    @FXML
+    void verDevueltos(ActionEvent event) {
+    	listaTodas=DaoHistoricoPrestamo.conseguirListaDevueltos();
+    	filtro=new FilteredList<ModeloHistoricoPrestamos>(listaTodas);
+    	tblHistorico.setItems(listaTodas);
+    	accionFiltrar(event);
+    	tblHistorico.refresh();
+    }
+    
+    @FXML
+    void verPendientes(ActionEvent event) {
+    	listaTodas=DaoHistoricoPrestamo.conseguirListaNoDevueltos();
+    	filtro=new FilteredList<ModeloHistoricoPrestamos>(listaTodas);
+    	tblHistorico.setItems(listaTodas);
+    	accionFiltrar(event);
+    	tblHistorico.refresh();
+    }
+    
+    @FXML
+    void verTodos(ActionEvent event) {
+    	listaTodas=DaoHistoricoPrestamo.conseguirListaTodos();
+    	filtro=new FilteredList<ModeloHistoricoPrestamos>(listaTodas);
+    	tblHistorico.setItems(listaTodas);
+    	accionFiltrar(event);
+    	tblHistorico.refresh();
     }
     
     /**

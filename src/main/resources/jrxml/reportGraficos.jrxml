@@ -1,0 +1,58 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="reportGraficos" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f0fee9ea-4222-4932-8050-f8275e18a47a">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionMariaIntento2"/>
+	<parameter name="Resource_Path" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[SELECT count( codigo_libro) AS 'Veces prestado'
+FROM libros.`Historico_prestamo`]]></query>
+	<field name="Veces prestado" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="Veces prestado"/>
+		<property name="com.jaspersoft.studio.field.label" value="Veces prestado"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="341" splitType="Stretch">
+		<element kind="staticText" uuid="b931a36e-4938-42e5-9198-0722e1fc0706" x="80" y="0" width="402" height="80" fontSize="50.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Graficos]]></text>
+		</element>
+		<element kind="staticText" uuid="3d82bf3a-7d12-4620-9b98-6c6a83dc63e9" x="-11" y="81" width="562" height="50" fontSize="30.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Veces que un libro ha sido prestado]]></text>
+		</element>
+		<element kind="subreport" uuid="5a00d97a-9064-407b-8b7b-cf7b5f9860ae" x="-22" y="130" width="580" height="200">
+			<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+			<expression><![CDATA[$P{Resource_Path}+"subreportVecesPrestado.jasper"]]></expression>
+		</element>
+	</title>
+	<detail>
+		<band height="270" splitType="Stretch">
+			<element kind="staticText" uuid="617f40f6-d1fb-4055-b4a9-f29ae99e2dcb" x="0" y="0" width="562" height="50" fontSize="30.0" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Cantidad de libros por cada estado]]></text>
+			</element>
+			<element kind="subreport" uuid="3d66f187-c9ff-409c-83d9-3059ab341d68" x="-10" y="50" width="200" height="200">
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<expression><![CDATA[$P{Resource_Path}+"subreportCantidadPorEstado.jasper"]]></expression>
+			</element>
+		</band>
+	</detail>
+	<pageFooter height="54" splitType="Stretch">
+		<element kind="frame" uuid="de59e704-915b-4e65-8f15-c0ba9addacff" mode="Transparent" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF">
+			<element kind="textField" uuid="970722c3-cb0e-4fa3-8e27-fe6f8e3b484a" x="533" y="0" width="40" height="20" forecolor="#736343" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle">
+				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+			</element>
+			<element kind="textField" uuid="a392e721-2a5f-4ec0-872d-7689217ef0ad" x="453" y="0" width="80" height="20" forecolor="#736343" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
+			</element>
+			<element kind="textField" uuid="35481dfc-160f-487e-8989-f55eb574b162" x="22" y="1" width="197" height="20" forecolor="#736343" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+		</element>
+	</pageFooter>
+	<summary height="279" splitType="Stretch">
+		<element kind="staticText" uuid="866d7771-0f8b-467c-a84c-adfc5d78c0f4" x="-4" y="0" width="562" height="50" fontSize="30.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Cantidad de prestamos por fecha]]></text>
+		</element>
+		<element kind="subreport" uuid="f54079dd-9f2c-4e21-88e5-42edaf002483" x="-20" y="50" width="200" height="200">
+			<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+			<expression><![CDATA[$P{Resource_Path}+"prestamosPorFecha.jasper"]]></expression>
+		</element>
+	</summary>
+</jasperReport>

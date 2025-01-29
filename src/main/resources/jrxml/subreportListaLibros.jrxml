@@ -1,0 +1,62 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="subreportListaLibros" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="377a3331-1a49-4dc0-9bab-36cdd5a98ee8">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionMariaIntento2"/>
+	<parameter name="CodigoLibro" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[SELECT dni_alumno,
+	fecha_prestamo,
+	id_prestamo,
+	fecha_devolucion
+FROM libros.`Historico_prestamo`
+WHERE 
+	 libros.`Historico_prestamo`.codigo_libro LIKE $P{CodigoLibro}]]></query>
+	<field name="dni_alumno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dni_alumno"/>
+		<property name="com.jaspersoft.studio.field.label" value="dni_alumno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="fecha_prestamo" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_prestamo"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_prestamo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="id_prestamo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_prestamo"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_prestamo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="fecha_devolucion" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_devolucion"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_devolucion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<background splitType="Stretch"/>
+	<detail>
+		<band height="63" splitType="Stretch">
+			<element kind="textField" uuid="a5637d0d-6606-442a-bd7e-5145662b8f97" x="160" y="0" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{id_prestamo}]]></expression>
+			</element>
+			<element kind="staticText" uuid="58b1d298-1b7b-413a-a09d-44eca620fc16" x="0" y="0" width="160" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Codigo:]]></text>
+			</element>
+			<element kind="staticText" uuid="028c60fb-6691-49f1-b001-6a015a9e6b38" x="0" y="30" width="160" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[DNI del alumno:]]></text>
+			</element>
+			<element kind="textField" uuid="5825c1a7-62ea-4d4e-88fd-ef8ef6bd5ec8" x="160" y="30" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{dni_alumno}]]></expression>
+			</element>
+			<element kind="staticText" uuid="195416d7-cd07-47af-9816-0d90b7939aea" x="300" y="0" width="140" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Fecha prestamo:]]></text>
+			</element>
+			<element kind="staticText" uuid="19c5fa31-a3f2-442c-80f9-d3626ad8f8c2" x="300" y="30" width="140" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Fecha devolucion:]]></text>
+			</element>
+			<element kind="textField" uuid="1bef0cda-c978-4381-b355-d4fb69aaec51" x="440" y="30" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{fecha_devolucion}==null ? "Sin devolver": $F{fecha_devolucion}]]></expression>
+			</element>
+			<element kind="textField" uuid="ce0dbe54-0ad6-4ea4-a5ad-b36d62069a7a" x="440" y="0" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{id_prestamo}]]></expression>
+			</element>
+		</band>
+	</detail>
+</jasperReport>
