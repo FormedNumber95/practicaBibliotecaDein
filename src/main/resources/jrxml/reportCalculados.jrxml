@@ -2,6 +2,7 @@
 <jasperReport name="reportCalculados" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="39c4dcc2-ec1a-4473-83b0-0c453b698b48">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionMariaIntento2"/>
+	<parameter name="IMAGE_PATH" class="java.lang.String"/>
 	<query language="SQL"><![CDATA[SELECT 
     COUNT(h.id_prestamo) AS prestamos,
     a.nombre,
@@ -44,9 +45,17 @@ GROUP BY a.dni, a.nombre, a.apellido1, a.apellido2
 		<property name="com.jaspersoft.studio.field.label" value="diferencia"/>
 	</field>
 	<background splitType="Stretch"/>
-	<title height="80" splitType="Stretch">
-		<element kind="staticText" uuid="2201ab51-042c-4cd0-8098-82188ff8c35c" x="0" y="0" width="550" height="80" fontSize="50.0" hTextAlign="Center" vTextAlign="Middle">
-			<text><![CDATA[Calculos sobre alumnos]]></text>
+	<title height="102" splitType="Stretch">
+		<element kind="frame" uuid="772db6cb-88ca-476d-bb8c-5d88c8b4bf74" mode="Opaque" x="0" y="0" width="442" height="100" backcolor="#000000">
+			<element kind="staticText" uuid="4b344692-ec2e-4165-a92c-475192c9a1cd" x="0" y="0" width="442" height="66" forecolor="#FFFFFF" fontSize="50.0" bold="false" hTextAlign="Center">
+				<text><![CDATA[Torre de Aketza]]></text>
+			</element>
+			<element kind="staticText" uuid="8bb5388b-be0a-4120-809d-6d4f0448e2cf" x="80" y="66" width="290" height="29" forecolor="#FFFFFF" fontSize="22.0" bold="false">
+				<text><![CDATA[Calculos sobre alumnos]]></text>
+			</element>
+		</element>
+		<element kind="image" uuid="d5d45540-a9cd-4254-b010-fc72e7ce4259" x="442" y="0" width="110" height="99">
+			<expression><![CDATA[$P{IMAGE_PATH}+"icono.png"]]></expression>
 		</element>
 	</title>
 	<detail>
@@ -87,17 +96,16 @@ GROUP BY a.dni, a.nombre, a.apellido1, a.apellido2
 		</band>
 	</detail>
 	<pageFooter height="37" splitType="Stretch">
-		<element kind="frame" uuid="01330ebc-656a-4c4e-9e81-04f944e6af61" mode="Transparent" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF">
-			<element kind="textField" uuid="d8c70d9b-1c64-43f0-9cda-fdd05a04891e" x="533" y="0" width="40" height="20" forecolor="#736343" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle">
+		<element kind="frame" uuid="01330ebc-656a-4c4e-9e81-04f944e6af61" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#050505">
+			<element kind="textField" uuid="d8c70d9b-1c64-43f0-9cda-fdd05a04891e" x="533" y="0" width="40" height="20" forecolor="#FFFFFF" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle">
 				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
 			</element>
-			<element kind="textField" uuid="91005202-7de8-47f4-ba06-283644eafd06" x="453" y="0" width="80" height="20" forecolor="#736343" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle">
+			<element kind="textField" uuid="91005202-7de8-47f4-ba06-283644eafd06" x="453" y="0" width="80" height="20" forecolor="#FFFFFF" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle">
 				<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
 			</element>
-			<element kind="textField" uuid="0d4fbeca-6338-4944-98fa-1f210a06a2c3" x="22" y="1" width="197" height="20" forecolor="#736343" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle">
+			<element kind="textField" uuid="0d4fbeca-6338-4944-98fa-1f210a06a2c3" x="22" y="1" width="197" height="20" forecolor="#FFFFFF" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle">
 				<expression><![CDATA[new java.util.Date()]]></expression>
 			</element>
 		</element>
 	</pageFooter>
-	<summary height="42" splitType="Stretch"/>
 </jasperReport>
