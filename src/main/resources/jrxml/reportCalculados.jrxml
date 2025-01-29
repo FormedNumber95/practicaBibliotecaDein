@@ -1,0 +1,103 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="reportCalculados" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="39c4dcc2-ec1a-4473-83b0-0c453b698b48">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionMariaIntento2"/>
+	<query language="SQL"><![CDATA[SELECT 
+    COUNT(h.id_prestamo) AS prestamos,
+    a.nombre,
+    a.dni,
+    a.apellido1,
+    a.apellido2,
+    SUM(DATEDIFF(h.fecha_devolucion, h.fecha_prestamo)) AS diferencia
+FROM libros.Alumno a
+INNER JOIN libros.Historico_prestamo h 
+    ON h.dni_alumno = a.dni 
+WHERE h.fecha_devolucion IS NOT NULL  
+GROUP BY a.dni, a.nombre, a.apellido1, a.apellido2
+]]></query>
+	<field name="prestamos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="prestamos"/>
+		<property name="com.jaspersoft.studio.field.label" value="prestamos"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="dni" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dni"/>
+		<property name="com.jaspersoft.studio.field.label" value="dni"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="diferencia" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="diferencia"/>
+		<property name="com.jaspersoft.studio.field.label" value="diferencia"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="80" splitType="Stretch">
+		<element kind="staticText" uuid="2201ab51-042c-4cd0-8098-82188ff8c35c" x="0" y="0" width="550" height="80" fontSize="50.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Calculos sobre alumnos]]></text>
+		</element>
+	</title>
+	<detail>
+		<band height="286" splitType="Stretch">
+			<element kind="staticText" uuid="3aa56978-c44f-4b7d-ab9f-6b3ee98c0049" x="170" y="0" width="210" height="50" fontSize="30.0" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Alumno]]></text>
+			</element>
+			<element kind="staticText" uuid="2bdf5a10-2b2c-4672-b10d-ea83019a82ca" x="20" y="50" width="240" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Nombre:]]></text>
+			</element>
+			<element kind="staticText" uuid="29fe33f2-0b39-450a-8296-5a3fbe023d18" x="20" y="80" width="240" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Apellidos:]]></text>
+			</element>
+			<element kind="staticText" uuid="c895e4c2-a610-4000-8dc9-60755a0d7132" x="20" y="110" width="240" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[DNI:]]></text>
+			</element>
+			<element kind="textField" uuid="886f4432-3b34-4449-8b78-0b0386e3660a" x="260" y="50" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{nombre}]]></expression>
+			</element>
+			<element kind="textField" uuid="6f9fc8cf-ec3a-4df9-ac86-e4e9bd496334" x="260" y="80" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{apellido1}+" "+$F{apellido2}]]></expression>
+			</element>
+			<element kind="textField" uuid="f52df9e0-41f1-4195-a0d3-20152aa2a643" x="260" y="110" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{dni}]]></expression>
+			</element>
+			<element kind="staticText" uuid="1a35a94b-2e67-407d-856d-3479158ffdeb" x="20" y="140" width="240" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Total de prestamos devueltos:]]></text>
+			</element>
+			<element kind="staticText" uuid="93c41218-a9e0-440f-951f-1e02f11ebd4d" x="20" y="170" width="240" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Dias totales que ha tardado:]]></text>
+			</element>
+			<element kind="textField" uuid="49c400eb-31ba-4403-9bc5-448a351615f2" x="260" y="140" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{prestamos}]]></expression>
+			</element>
+			<element kind="textField" uuid="c2a7af0d-5ae0-4308-b7e7-4b5af398960b" x="260" y="170" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{diferencia}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<pageFooter height="37" splitType="Stretch">
+		<element kind="frame" uuid="01330ebc-656a-4c4e-9e81-04f944e6af61" mode="Transparent" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF">
+			<element kind="textField" uuid="d8c70d9b-1c64-43f0-9cda-fdd05a04891e" x="533" y="0" width="40" height="20" forecolor="#736343" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle">
+				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+			</element>
+			<element kind="textField" uuid="91005202-7de8-47f4-ba06-283644eafd06" x="453" y="0" width="80" height="20" forecolor="#736343" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
+			</element>
+			<element kind="textField" uuid="0d4fbeca-6338-4944-98fa-1f210a06a2c3" x="22" y="1" width="197" height="20" forecolor="#736343" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+		</element>
+	</pageFooter>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>
