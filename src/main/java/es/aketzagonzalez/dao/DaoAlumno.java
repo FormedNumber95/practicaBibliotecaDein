@@ -30,6 +30,23 @@ public class DaoAlumno {
 		}
 		return lst;
 	}
+	
+	public static ModeloAlumno conseguirPorDni(String dni){
+		try {
+			con=ConexionBBDD.getConnection();
+			String select="SELECT nombre,apellido1,apellido2 FROM Alumno WHERE dni like ?";
+			PreparedStatement pstmt = con.prepareStatement(select);
+			pstmt.setString(1,dni);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				ModeloAlumno l= new ModeloAlumno(dni, rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"));
+				return l;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public static void insertar(String dni, String nombre, String ap1, String ap2) {
 		con=ConexionBBDD.getConnection();
