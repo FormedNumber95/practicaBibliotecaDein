@@ -1,7 +1,6 @@
 package es.aketzagonzalez.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,15 +9,26 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 import es.aketzagonzalez.db.ConexionBBDD;
-import es.aketzagonzalez.model.ModeloAlumno;
 import es.aketzagonzalez.model.ModeloHistoricoPrestamos;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * The Class DaoHistoricoPrestamo.
+ * @author Aketza
+ * @version 1.0
+ */
 public class DaoHistoricoPrestamo {
 
+/** The con. */
 private static Connection con;
 	
+	/**
+	 * Conseguir lista todos.
+	 *
+	 * @return the observable list
+	 * @author Aketza
+	 */
 	public static ObservableList<ModeloHistoricoPrestamos> conseguirListaTodos(){
 		ObservableList<ModeloHistoricoPrestamos>lst=FXCollections.observableArrayList();
 		try {
@@ -37,6 +47,15 @@ private static Connection con;
 		return lst;
 	}
 	
+	/**
+	 * Conseguir codigo.
+	 *
+	 * @param dni the dni
+	 * @param codigoLibro the codigo libro
+	 * @param now the now
+	 * @return the int
+	 * @author Aketza
+	 */
 	public static int conseguirCodigo(String dni, int codigoLibro,LocalDateTime now){
 		try {
 			con=ConexionBBDD.getConnection();
@@ -57,6 +76,14 @@ private static Connection con;
 		return -1;
 	}
 	
+	/**
+	 * Insertar.
+	 *
+	 * @param dni the dni
+	 * @param codigoLibro the codigo libro
+	 * @param now the now
+	 * @author Aketza
+	 */
 	public static void insertar(String dni, int codigoLibro,LocalDateTime now) {
 	    con = ConexionBBDD.getConnection();
 	    String insert = "INSERT INTO Historico_prestamo (dni_alumno, codigo_libro, fecha_prestamo) VALUES(?, ?, ?)";
@@ -73,6 +100,12 @@ private static Connection con;
 	    }
 	}
 	
+	/**
+	 * Devolver.
+	 *
+	 * @param codigo the codigo
+	 * @author Aketza
+	 */
 	public static void devolver(int codigo) {
 		 con = ConexionBBDD.getConnection();
 		 String update="UPDATE Historico_prestamo SET fecha_devolucion=? WHERE id_prestamo like ?;";
@@ -88,6 +121,12 @@ private static Connection con;
 		 }
 	}
 	
+	/**
+	 * Conseguir lista no devueltos.
+	 *
+	 * @return the observable list
+	 * @author Aketza
+	 */
 	public static ObservableList<ModeloHistoricoPrestamos> conseguirListaNoDevueltos(){
 		ObservableList<ModeloHistoricoPrestamos>lst=FXCollections.observableArrayList();
 		try {
@@ -106,6 +145,12 @@ private static Connection con;
 		return lst;
 	}
 	
+	/**
+	 * Conseguir lista devueltos.
+	 *
+	 * @return the observable list
+	 * @author Aketza
+	 */
 	public static ObservableList<ModeloHistoricoPrestamos> conseguirListaDevueltos(){
 		ObservableList<ModeloHistoricoPrestamos>lst=FXCollections.observableArrayList();
 		try {

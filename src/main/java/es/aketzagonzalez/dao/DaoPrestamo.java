@@ -12,10 +12,22 @@ import es.aketzagonzalez.model.ModeloPrestamo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * The Class DaoPrestamo.
+ * @author Aketza
+ * @version 1.0
+ */
 public class DaoPrestamo {
 
+/** The con. */
 private static Connection con;
 	
+	/**
+	 * Conseguir lista todos.
+	 *
+	 * @return the observable list
+	 * @author Aketza
+	 */
 	public static ObservableList<ModeloPrestamo> conseguirListaTodos(){
 		ObservableList<ModeloPrestamo>lst=FXCollections.observableArrayList();
 		try {
@@ -34,6 +46,15 @@ private static Connection con;
 		return lst;
 	}
 	
+	/**
+	 * Insertar.
+	 *
+	 * @param dni the dni
+	 * @param codigoLibro the codigo libro
+	 * @param now the now
+	 * @param codigo the codigo
+	 * @author Aketza
+	 */
 	public static void insertar(String dni, int codigoLibro, LocalDateTime now,int codigo) {
 	    con = ConexionBBDD.getConnection();
 	    String insert = "INSERT INTO Prestamo (id_prestamo,dni_alumno, codigo_libro, fecha_prestamo) VALUES(?,?, ?, ?)";
@@ -49,6 +70,12 @@ private static Connection con;
 	    }
 	}
 	
+	/**
+	 * Borrar.
+	 *
+	 * @param codigo the codigo
+	 * @author Aketza
+	 */
 	public static void borrar(int codigo) {
 		String delete="DELETE FROM Prestamo WHERE id_prestamo like ?";
 		try {

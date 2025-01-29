@@ -20,6 +20,7 @@ public class ModeloHistoricoPrestamos extends ModeloPrestamo{
 	 * @param codLibro the cod libro
 	 * @param fechaPrestamo the fecha prestamo
 	 * @param fechaDevolucion the fecha devolucion
+	 * @author Aketza
 	 */
 	public ModeloHistoricoPrestamos(String dni, String codLibro, Date fechaPrestamo, Date fechaDevolucion) {
 		super(dni, codLibro, fechaPrestamo);
@@ -30,6 +31,7 @@ public class ModeloHistoricoPrestamos extends ModeloPrestamo{
 	 * Gets the fecha devolucion.
 	 *
 	 * @return the fecha devolucion
+	 * @author Aketza
 	 */
 	public Date getFechaDevolucion() {
 		return fechaDevolucion;
@@ -39,6 +41,7 @@ public class ModeloHistoricoPrestamos extends ModeloPrestamo{
 	 * Sets the fecha devolucion.
 	 *
 	 * @param fechaDevolucion the new fecha devolucion
+	 * @author Aketza
 	 */
 	public void setFechaDevolucion(Date fechaDevolucion) {
 		this.fechaDevolucion = fechaDevolucion;
@@ -48,6 +51,7 @@ public class ModeloHistoricoPrestamos extends ModeloPrestamo{
 	 * Hash code.
 	 *
 	 * @return the int
+	 * @author Aketza
 	 */
 	@Override
 	public int hashCode() {
@@ -62,6 +66,7 @@ public class ModeloHistoricoPrestamos extends ModeloPrestamo{
 	 *
 	 * @param obj the obj
 	 * @return true, if successful
+	 * @author Aketza
 	 */
 	@Override
 	public boolean equals(Object obj) {

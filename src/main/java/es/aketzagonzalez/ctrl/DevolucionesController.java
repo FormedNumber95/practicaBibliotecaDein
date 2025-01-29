@@ -20,59 +20,91 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * The Class DevolucionesController.
+ * @author Aketza
+ * @version 1.1
+ */
 public class DevolucionesController {
 
+    /** The btn alumnos. */
     @FXML
     private Button btnAlumnos;
 
+    /** The btn devoluciones. */
     @FXML
     private Button btnDevoluciones;
 
+    /** The btn devolver. */
     @FXML
     private Button btnDevolver;
 
+    /** The btn informes. */
     @FXML
     private Button btnInformes;
 
+    /** The btn libros. */
     @FXML
     private Button btnLibros;
 
+    /** The btn prestamos. */
     @FXML
     private Button btnPrestamos;
     
+    /** The menu item ver desarrolador. */
+    @FXML
+    private MenuItem menuItemVerDesarrolador;
+    
+    /** The col cod libro. */
     @FXML
     private TableColumn<ModeloPrestamo, String> colCodLibro;
 
+    /** The col dni alumno. */
     @FXML
     private TableColumn<ModeloPrestamo, String> colDniAlumno;
 
+    /** The col fecha prestamo. */
     @FXML
     private TableColumn<ModeloPrestamo, Date> colFechaPrestamo;
 
+    /** The col id prestamo. */
     @FXML
     private TableColumn<ModeloPrestamo, Integer> colIdPrestamo;
     
+    /** The tbl devoluciones. */
     @FXML
     private TableView<ModeloPrestamo> tblDevoluciones;
 
+    /** The men ayuda. */
     @FXML
     private Menu menAyuda;
 
+    /** The txt filtro. */
     @FXML
     private TextField txtFiltro;
     
+    /** The filtro. */
     private FilteredList<ModeloPrestamo> filtro;
     
+    /** The s. */
     private static Stage s;
     
+    /** The lista todas. */
     private static ObservableList<ModeloPrestamo> listaTodas;
 
+    /**
+     * Accion filtrar.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void accionFiltrar(ActionEvent event) {
     	tblDevoluciones.setItems(filtro);
@@ -83,6 +115,12 @@ public class DevolucionesController {
     	}
     }
 
+    /**
+     * Devolver libro.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void devolverLibro(ActionEvent event) {
     	if (tblDevoluciones.getSelectionModel().getSelectedItem()!=null) {
@@ -117,6 +155,12 @@ public class DevolucionesController {
     	}
     }
 
+    /**
+     * Ver alumnos.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void verAlumnos(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -126,16 +170,37 @@ public class DevolucionesController {
         Navegador.cargarVista("alumnos", bundle);
     }
 
+    /**
+     * Ver quien ha desarrollado la app.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
-    void verAyuda(ActionEvent event) {
-
+    void verDesarrollador(ActionEvent event) {
+    	Alert al=new Alert(AlertType.INFORMATION);
+    	al.setHeaderText(null);
+    	al.setContentText("Desarrollador: Aketza González Rey");
+    	al.showAndWait();
     }
 
+    /**
+     * Ver devoluciones, vacio pero necesario para evitar errores.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void verDevoluciones(ActionEvent event) {
 
     }
 
+    /**
+     * Ver informes.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void verInformes(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -145,6 +210,12 @@ public class DevolucionesController {
         Navegador.cargarVista("informes", bundle);
     }
 
+    /**
+     * Ver libros.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void verLibros(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -154,6 +225,12 @@ public class DevolucionesController {
         Navegador.cargarVista("libros", bundle);
     }
 
+    /**
+     * Ver prestamos.
+     *
+     * @param event the event
+     * @author Aketza
+     */
     @FXML
     void verPrestamos(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -165,6 +242,7 @@ public class DevolucionesController {
     
     /**
      * Initialize.
+     * @author Aketza
      */
     @FXML
     private void initialize() {
@@ -178,6 +256,12 @@ public class DevolucionesController {
     	tblDevoluciones.setItems(listaTodas);
     }
     
+    /**
+     * Gets the s.
+     *
+     * @return the s
+     * @author Aketza
+     */
     public static Stage getS() {
 		return s;
 	}

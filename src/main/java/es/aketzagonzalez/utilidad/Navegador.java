@@ -21,6 +21,7 @@ public class Navegador {
      * Sets the stage.
      *
      * @param primaryStage the new stage
+     * @author Aketza
      */
     public static void setStage(Stage primaryStage) {
         stage = primaryStage;
@@ -32,6 +33,7 @@ public class Navegador {
      * @author Aketza
      * @param fxml the fxml
      * @param bundle the bundle
+     * @author Aketza
      */
     public static void cargarVista(String fxml, ResourceBundle bundle) {
         try {

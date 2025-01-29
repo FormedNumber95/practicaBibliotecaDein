@@ -16,65 +16,101 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * The Class AlumnosController.
+ * @author Aketza
+ * @version 1.1
+ */
 public class AlumnosController {
 
+    /** The btn alumnos. */
     @FXML
     private Button btnAlumnos;
 
+    /** The btn aniadir. */
     @FXML
     private Button btnAniadir;
 
+    /** The btn devoluciones. */
     @FXML
     private Button btnDevoluciones;
 
+    /** The btn informes. */
     @FXML
     private Button btnInformes;
 
+    /** The btn libros. */
     @FXML
     private Button btnLibros;
 
+    /** The btn modificar. */
     @FXML
     private Button btnModificar;
 
+    /** The btn prestamos. */
     @FXML
     private Button btnPrestamos;
 
+    /** The men ayuda. */
     @FXML
     private Menu menAyuda;
 
+    /** The txt filtro. */
     @FXML
     private TextField txtFiltro;
     
+    /** The col ap 1. */
     @FXML
     private TableColumn<ModeloAlumno, String> colAp1;
 
+    /** The col ap 2. */
     @FXML
     private TableColumn<ModeloAlumno, String> colAp2;
 
+    /** The col dni. */
     @FXML
     private TableColumn<ModeloAlumno, String> colDni;
 
+    /** The col nombre. */
     @FXML
     private TableColumn<ModeloAlumno, String> colNombre;
     
+    /** The tbl alumnos. */
     @FXML
     private TableView<ModeloAlumno> tblAlumnos;
     
+    /** The filtro. */
     private FilteredList<ModeloAlumno> filtro;
     
+    /** The s. */
     private static Stage s;
     
+    /** The menu item ver desarrolador. */
+    @FXML
+    private MenuItem menuItemVerDesarrolador;
+    
+    /** The lista todas. */
     private static ObservableList<ModeloAlumno> listaTodas;
     
+    /** The es aniadir. */
     private static boolean esAniadir;
 
+    /**
+     * Accion filtrar, para filtrar al pulsar "enter" sobre el textarea del filtro.
+     *
+     * @author Aketza
+     * @param event the event
+     */
     @FXML
     void accionFiltrar(ActionEvent event) {
     	tblAlumnos.setItems(filtro);
@@ -85,6 +121,12 @@ public class AlumnosController {
     	}
     }
 
+    /**
+     * Aniadir alumno.
+     *
+     * @author Aketza
+     * @param event the event
+     */
     @FXML
     void aniadirAlumno(ActionEvent event) {
     	esAniadir=true;
@@ -99,8 +141,6 @@ public class AlumnosController {
 			scene = new Scene(controlador.load());
 			s.setTitle("Nuevo Alumno");
 			s.setScene(scene);
-			AniadirAlumnoController controller = controlador.getController();
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -112,6 +152,12 @@ public class AlumnosController {
         tblAlumnos.refresh();
     }
 
+    /**
+     * Modificar alumno seleccionado.
+     *
+     * @author Aketza
+     * @param event the event
+     */
     @FXML
     void modificarAlumno(ActionEvent event) {
     	esAniadir=false;
@@ -145,16 +191,37 @@ public class AlumnosController {
     	}
     }
 
+    /**
+     * Ver alumnos, vacio pero necesario para evitar errores.
+     *
+     * @author Aketza
+     * @param event the event
+     */
     @FXML
     void verAlumnos(ActionEvent event) {
     	
     }
 
+    /**
+     * Ver quien ha desarrollado la app.
+     *
+     * @author Aketza
+     * @param event the event
+     */
     @FXML
-    void verAyuda(ActionEvent event) {
-
+    void verDesarrollador(ActionEvent event) {
+    	Alert al=new Alert(AlertType.INFORMATION);
+    	al.setHeaderText(null);
+    	al.setContentText("Desarrollador: Aketza González Rey");
+    	al.showAndWait();
     }
 
+    /**
+     * Ver devoluciones.
+     *
+     * @author Aketza
+     * @param event the event
+     */
     @FXML
     void verDevoluciones(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -164,6 +231,12 @@ public class AlumnosController {
         Navegador.cargarVista("devoluciones", bundle);
     }
 
+    /**
+     * Ver informes.
+     *
+     * @author Aketza
+     * @param event the event
+     */
     @FXML
     void verInformes(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -173,6 +246,12 @@ public class AlumnosController {
         Navegador.cargarVista("informes", bundle);
     }
 
+    /**
+     * Ver libros.
+     *
+     * @author Aketza
+     * @param event the event
+     */
     @FXML
     void verLibros(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -182,6 +261,12 @@ public class AlumnosController {
         Navegador.cargarVista("libros", bundle);
     }
 
+    /**
+     * Ver prestamos.
+     *
+     * @author Aketza
+     * @param event the event
+     */
     @FXML
     void verPrestamos(ActionEvent event) {
     	Properties connConfig =ConexionBBDD.loadProperties() ;
@@ -193,6 +278,7 @@ public class AlumnosController {
     
     /**
      * Initialize.
+     * @author Aketza
      */
     @FXML
     private void initialize() {
@@ -206,14 +292,32 @@ public class AlumnosController {
     	tblAlumnos.setItems(listaTodas);
     }
     
+    /**
+     * Gets the s.
+     *
+     * @author Aketza
+     * @return the s
+     */
     public static Stage getS() {
 		return s;
 	}
     
+    /**
+     * Checks if is es aniadir.
+     *
+     * @author Aketza
+     * @return true, if is es aniadir
+     */
     public static boolean isEsAniadir() {
 		return esAniadir;
 	}
     
+    /**
+     * Sets the lista todas.
+     *
+     * @author Aketza
+     * @param listaTodas the new lista todas
+     */
     public static void setListaTodas(ObservableList<ModeloAlumno> listaTodas) {
 		AlumnosController.listaTodas = listaTodas;
 	}
