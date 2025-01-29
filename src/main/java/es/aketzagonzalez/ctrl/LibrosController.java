@@ -19,11 +19,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -33,7 +36,7 @@ import javafx.stage.Stage;
 /**
  * The Class LibrosController.
  * @author Aketza
- * @version 1.0
+ * @version 1.1
  */
 public class LibrosController {
 
@@ -108,6 +111,10 @@ public class LibrosController {
     /** The txt filtro. */
     @FXML
     private TextField txtFiltro;
+    
+    /** The menu item ver desarrolador. */
+    @FXML
+    private MenuItem menuItemVerDesarrolador;
     
     /** The filtro. */
     private FilteredList<ModeloLibro> filtro;
@@ -242,14 +249,17 @@ public class LibrosController {
     }
 
     /**
-     * Ver ayuda.
+     * Ver quien ha desarrollado la app.
      *
      * @param event the event
      * @author Aketza
      */
     @FXML
-    void verAyuda(ActionEvent event) {
-
+    void verDesarrollador(ActionEvent event) {
+    	Alert al=new Alert(AlertType.INFORMATION);
+    	al.setHeaderText(null);
+    	al.setContentText("Desarrollador: Aketza González Rey");
+    	al.showAndWait();
     }
 
     /**

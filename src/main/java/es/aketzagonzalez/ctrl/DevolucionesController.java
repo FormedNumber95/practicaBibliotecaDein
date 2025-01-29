@@ -20,6 +20,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -29,7 +30,7 @@ import javafx.stage.Stage;
 /**
  * The Class DevolucionesController.
  * @author Aketza
- * @version 1.0
+ * @version 1.1
  */
 public class DevolucionesController {
 
@@ -56,6 +57,10 @@ public class DevolucionesController {
     /** The btn prestamos. */
     @FXML
     private Button btnPrestamos;
+    
+    /** The menu item ver desarrolador. */
+    @FXML
+    private MenuItem menuItemVerDesarrolador;
     
     /** The col cod libro. */
     @FXML
@@ -166,14 +171,17 @@ public class DevolucionesController {
     }
 
     /**
-     * Ver ayuda.
+     * Ver quien ha desarrollado la app.
      *
      * @param event the event
      * @author Aketza
      */
     @FXML
-    void verAyuda(ActionEvent event) {
-
+    void verDesarrollador(ActionEvent event) {
+    	Alert al=new Alert(AlertType.INFORMATION);
+    	al.setHeaderText(null);
+    	al.setContentText("Desarrollador: Aketza González Rey");
+    	al.showAndWait();
     }
 
     /**

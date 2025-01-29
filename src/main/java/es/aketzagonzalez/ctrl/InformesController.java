@@ -12,8 +12,11 @@ import es.aketzagonzalez.db.ConexionBBDD;
 import es.aketzagonzalez.utilidad.Navegador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Alert.AlertType;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -24,7 +27,7 @@ import net.sf.jasperreports.view.JasperViewer;
 /**
  * The Class InformesController.
  * @author Aketza
- * @version 1.0
+ * @version 1.1
  */
 public class InformesController {
 
@@ -63,6 +66,10 @@ public class InformesController {
     /** The men ayuda. */
     @FXML
     private Menu menAyuda;
+    
+    /** The menu item ver desarrolador. */
+    @FXML
+    private MenuItem menuItemVerDesarrolador;
 
     /**
      * Generar informe calculos.
@@ -154,14 +161,17 @@ public class InformesController {
     }
 
     /**
-     * Ver ayuda.
+     * Ver quien ha desarrollado la app.
      *
      * @param event the event
      * @author Aketza
      */
     @FXML
-    void verAyuda(ActionEvent event) {
-
+    void verDesarrollador(ActionEvent event) {
+    	Alert al=new Alert(AlertType.INFORMATION);
+    	al.setHeaderText(null);
+    	al.setContentText("Desarrollador: Aketza González Rey");
+    	al.showAndWait();
     }
 
     /**

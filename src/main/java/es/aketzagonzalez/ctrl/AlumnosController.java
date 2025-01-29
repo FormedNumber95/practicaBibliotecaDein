@@ -16,8 +16,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,7 +29,7 @@ import javafx.stage.Stage;
 /**
  * The Class AlumnosController.
  * @author Aketza
- * @version 1.0
+ * @version 1.1
  */
 public class AlumnosController {
 
@@ -92,6 +95,10 @@ public class AlumnosController {
     /** The s. */
     private static Stage s;
     
+    /** The menu item ver desarrolador. */
+    @FXML
+    private MenuItem menuItemVerDesarrolador;
+    
     /** The lista todas. */
     private static ObservableList<ModeloAlumno> listaTodas;
     
@@ -101,8 +108,8 @@ public class AlumnosController {
     /**
      * Accion filtrar, para filtrar al pulsar "enter" sobre el textarea del filtro.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void accionFiltrar(ActionEvent event) {
@@ -117,8 +124,8 @@ public class AlumnosController {
     /**
      * Aniadir alumno.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void aniadirAlumno(ActionEvent event) {
@@ -148,8 +155,8 @@ public class AlumnosController {
     /**
      * Modificar alumno seleccionado.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void modificarAlumno(ActionEvent event) {
@@ -187,8 +194,8 @@ public class AlumnosController {
     /**
      * Ver alumnos, vacio pero necesario para evitar errores.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verAlumnos(ActionEvent event) {
@@ -198,19 +205,22 @@ public class AlumnosController {
     /**
      * Ver quien ha desarrollado la app.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
-    void verAyuda(ActionEvent event) {
-
+    void verDesarrollador(ActionEvent event) {
+    	Alert al=new Alert(AlertType.INFORMATION);
+    	al.setHeaderText(null);
+    	al.setContentText("Desarrollador: Aketza González Rey");
+    	al.showAndWait();
     }
 
     /**
      * Ver devoluciones.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verDevoluciones(ActionEvent event) {
@@ -224,8 +234,8 @@ public class AlumnosController {
     /**
      * Ver informes.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verInformes(ActionEvent event) {
@@ -239,8 +249,8 @@ public class AlumnosController {
     /**
      * Ver libros.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verLibros(ActionEvent event) {
@@ -254,8 +264,8 @@ public class AlumnosController {
     /**
      * Ver prestamos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verPrestamos(ActionEvent event) {
@@ -285,8 +295,8 @@ public class AlumnosController {
     /**
      * Gets the s.
      *
-     * @return the s
      * @author Aketza
+     * @return the s
      */
     public static Stage getS() {
 		return s;
@@ -295,8 +305,8 @@ public class AlumnosController {
     /**
      * Checks if is es aniadir.
      *
-     * @return true, if is es aniadir
      * @author Aketza
+     * @return true, if is es aniadir
      */
     public static boolean isEsAniadir() {
 		return esAniadir;
@@ -305,8 +315,8 @@ public class AlumnosController {
     /**
      * Sets the lista todas.
      *
-     * @param listaTodas the new lista todas
      * @author Aketza
+     * @param listaTodas the new lista todas
      */
     public static void setListaTodas(ObservableList<ModeloAlumno> listaTodas) {
 		AlumnosController.listaTodas = listaTodas;
