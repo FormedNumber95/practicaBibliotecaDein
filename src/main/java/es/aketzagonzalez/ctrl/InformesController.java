@@ -1,6 +1,11 @@
 package es.aketzagonzalez.ctrl;
 
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -10,6 +15,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class InformesController {
 
@@ -47,7 +59,20 @@ public class InformesController {
 
     @FXML
     void generarListaLibros(ActionEvent event) {
-
+    	try {
+    		ConexionBBDD db=new ConexionBBDD();
+			InputStream reportStream =getClass().getResourceAsStream("/jasper/listaLibros.jasper");
+            JasperReport report = (JasperReport) JRLoader.loadObject(reportStream);
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("Resource_Path", db.getClass().getResource("/jasper/").toString());
+            JasperPrint jprint = JasperFillManager.fillReport(report, parameters,  ConexionBBDD.getConnection());
+            JasperViewer viewer = new JasperViewer(jprint, false);
+            viewer.setVisible(true);
+    	} catch (JRException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML

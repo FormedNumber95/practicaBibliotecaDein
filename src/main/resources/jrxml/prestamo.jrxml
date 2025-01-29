@@ -51,7 +51,7 @@
 			<text><![CDATA[Autor:]]></text>
 		</element>
 		<element kind="staticText" uuid="f42b35c1-7e33-4aa4-8d7e-626095a3ce4b" x="342" y="210" width="90" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
-			<text><![CDATA[Editor]]></text>
+			<text><![CDATA[Editorial:]]></text>
 		</element>
 		<element kind="staticText" uuid="8bb0855e-b2af-4ec9-bad0-7d6ef102c33a" x="342" y="240" width="90" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
 			<text><![CDATA[Estado:]]></text>
