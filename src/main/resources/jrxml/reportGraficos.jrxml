@@ -3,6 +3,7 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionMariaIntento2"/>
 	<parameter name="Resource_Path" class="java.lang.String"/>
+	<parameter name="IMAGE_PATH" class="java.lang.String"/>
 	<query language="SQL"><![CDATA[SELECT count( codigo_libro) AS 'Veces prestado'
 FROM libros.`Historico_prestamo`]]></query>
 	<field name="Veces prestado" class="java.lang.Long">
@@ -10,16 +11,24 @@ FROM libros.`Historico_prestamo`]]></query>
 		<property name="com.jaspersoft.studio.field.label" value="Veces prestado"/>
 	</field>
 	<background splitType="Stretch"/>
-	<title height="341" splitType="Stretch">
-		<element kind="staticText" uuid="b931a36e-4938-42e5-9198-0722e1fc0706" x="80" y="0" width="402" height="80" fontSize="50.0" hTextAlign="Center" vTextAlign="Middle">
-			<text><![CDATA[Graficos]]></text>
-		</element>
-		<element kind="staticText" uuid="3d82bf3a-7d12-4620-9b98-6c6a83dc63e9" x="-11" y="81" width="562" height="50" fontSize="30.0" hTextAlign="Center" vTextAlign="Middle">
+	<title height="386" splitType="Stretch">
+		<element kind="staticText" uuid="3d82bf3a-7d12-4620-9b98-6c6a83dc63e9" x="-10" y="110" width="562" height="50" fontSize="30.0" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Veces que un libro ha sido prestado]]></text>
 		</element>
-		<element kind="subreport" uuid="5a00d97a-9064-407b-8b7b-cf7b5f9860ae" x="-22" y="130" width="580" height="200">
+		<element kind="subreport" uuid="5a00d97a-9064-407b-8b7b-cf7b5f9860ae" x="-21" y="159" width="580" height="200">
 			<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 			<expression><![CDATA[$P{Resource_Path}+"subreportVecesPrestado.jasper"]]></expression>
+		</element>
+		<element kind="frame" uuid="352e340a-30e7-4e6a-8558-46408a99424c" mode="Opaque" x="0" y="0" width="442" height="100" backcolor="#000000">
+			<element kind="staticText" uuid="944db33a-dd31-4bd5-9bf6-eeabdf71d879" x="0" y="0" width="442" height="66" forecolor="#FFFFFF" fontSize="50.0" bold="false" hTextAlign="Center">
+				<text><![CDATA[Torre de Aketza]]></text>
+			</element>
+			<element kind="staticText" uuid="490b8b75-88ef-4df5-b654-3646645e6e06" x="80" y="66" width="290" height="29" forecolor="#FFFFFF" fontSize="22.0" bold="false">
+				<text><![CDATA[Graficos]]></text>
+			</element>
+		</element>
+		<element kind="image" uuid="5bf16fb4-c37e-4aeb-9d86-f59999d8fc48" x="442" y="0" width="110" height="99">
+			<expression><![CDATA[$P{IMAGE_PATH}+"icono.png"]]></expression>
 		</element>
 	</title>
 	<detail>
@@ -33,15 +42,15 @@ FROM libros.`Historico_prestamo`]]></query>
 			</element>
 		</band>
 	</detail>
-	<pageFooter height="54" splitType="Stretch">
-		<element kind="frame" uuid="de59e704-915b-4e65-8f15-c0ba9addacff" mode="Transparent" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF">
-			<element kind="textField" uuid="970722c3-cb0e-4fa3-8e27-fe6f8e3b484a" x="533" y="0" width="40" height="20" forecolor="#736343" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle">
+	<pageFooter height="32" splitType="Stretch">
+		<element kind="frame" uuid="3449cedd-245e-42d8-8bbc-d989cfc1a18c" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#050505">
+			<element kind="textField" uuid="f00bb901-4f21-4019-ae53-4976b437f1a2" x="533" y="0" width="40" height="20" forecolor="#FFFFFF" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle">
 				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
 			</element>
-			<element kind="textField" uuid="a392e721-2a5f-4ec0-872d-7689217ef0ad" x="453" y="0" width="80" height="20" forecolor="#736343" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle">
+			<element kind="textField" uuid="cb2eed1a-9058-453b-817b-9d87121f0508" x="453" y="0" width="80" height="20" forecolor="#FFFFFF" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle">
 				<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
 			</element>
-			<element kind="textField" uuid="35481dfc-160f-487e-8989-f55eb574b162" x="22" y="1" width="197" height="20" forecolor="#736343" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle">
+			<element kind="textField" uuid="fcc93bf5-912c-455e-b3f6-21f133ec3b69" x="22" y="1" width="197" height="20" forecolor="#FFFFFF" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle">
 				<expression><![CDATA[new java.util.Date()]]></expression>
 			</element>
 		</element>

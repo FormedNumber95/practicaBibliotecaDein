@@ -1,6 +1,7 @@
 package es.aketzagonzalez.ctrl;
 
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,6 +54,7 @@ public class AniadirPrestamoController {
     	DaoLibro.modificar(l.getTitulo(), l.getAutor(), l.getEditorial(), l.getEstado(), 1, l.getCodigo(), l.getFotoStream());
     	DaoPrestamo.insertar(cmbAlumno.getSelectionModel().getSelectedItem().getDni(), l.getCodigo(),now,DaoHistoricoPrestamo.conseguirCodigo(cmbAlumno.getSelectionModel().getSelectedItem().getDni(), l.getCodigo(),now));
     	try {
+    		ConexionBBDD db= new ConexionBBDD();
     		ModeloAlumno alum=cmbAlumno.getSelectionModel().getSelectedItem();
 			InputStream reportStream =getClass().getResourceAsStream("/jasper/prestamo.jasper");
             JasperReport report = (JasperReport) JRLoader.loadObject(reportStream);
@@ -68,10 +70,13 @@ public class AniadirPrestamoController {
             parameters.put("FechaActual", now.getYear()+"/"+now.getMonth()+"/"+now.getDayOfMonth());
             LocalDateTime devolver=now.plusDays(15);
             parameters.put("FechaUltimoDia",devolver.getYear()+"/"+devolver.getMonth()+"/"+devolver.getDayOfMonth());
+            parameters.put("IMAGE_PATH", db.getClass().getResource("/imagenes/").toString());
             JasperPrint jprint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
             JasperViewer viewer = new JasperViewer(jprint, false);
             viewer.setVisible(true);
     	} catch (JRException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
     	Alert al=new Alert(AlertType.INFORMATION);

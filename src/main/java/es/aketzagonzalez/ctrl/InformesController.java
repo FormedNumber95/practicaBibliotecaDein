@@ -59,7 +59,7 @@ public class InformesController {
 			InputStream reportStream =getClass().getResourceAsStream("/jasper/reportCalculados.jasper");
             JasperReport report = (JasperReport) JRLoader.loadObject(reportStream);
             Map<String, Object> parameters = new HashMap<>();
-            parameters.put("Resource_Path", db.getClass().getResource("/jasper/").toString());
+            parameters.put("IMAGE_PATH", db.getClass().getResource("/imagenes/").toString());
             JasperPrint jprint = JasperFillManager.fillReport(report, parameters,  ConexionBBDD.getConnection());
             JasperViewer viewer = new JasperViewer(jprint, false);
             viewer.setVisible(true);
@@ -78,6 +78,7 @@ public class InformesController {
             JasperReport report = (JasperReport) JRLoader.loadObject(reportStream);
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("Resource_Path", db.getClass().getResource("/jasper/").toString());
+            parameters.put("IMAGE_PATH", db.getClass().getResource("/imagenes/").toString());
             JasperPrint jprint = JasperFillManager.fillReport(report, parameters,  ConexionBBDD.getConnection());
             JasperViewer viewer = new JasperViewer(jprint, false);
             viewer.setVisible(true);
@@ -96,6 +97,7 @@ public class InformesController {
             JasperReport report = (JasperReport) JRLoader.loadObject(reportStream);
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("Resource_Path", db.getClass().getResource("/jasper/").toString());
+            parameters.put("IMAGE_PATH", db.getClass().getResource("/imagenes/").toString());
             JasperPrint jprint = JasperFillManager.fillReport(report, parameters,  ConexionBBDD.getConnection());
             JasperViewer viewer = new JasperViewer(jprint, false);
             viewer.setVisible(true);

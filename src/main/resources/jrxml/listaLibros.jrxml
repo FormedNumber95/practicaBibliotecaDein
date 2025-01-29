@@ -3,6 +3,7 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionMariaIntento2"/>
 	<parameter name="Resource_Path" class="java.lang.String"/>
+	<parameter name="IMAGE_PATH" class="java.lang.String"/>
 	<query language="SQL"><![CDATA[SELECT codigo,
 	estado,
 	editorial,
@@ -35,50 +36,58 @@ FROM libros.`Libro`]]></query>
 		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
 	</field>
 	<background splitType="Stretch"/>
-	<title height="80" splitType="Stretch">
-		<element kind="staticText" uuid="0218c734-1e51-4362-939f-16e038025ff0" x="80" y="0" width="402" height="80" fontSize="50.0" hTextAlign="Center" vTextAlign="Middle">
-			<text><![CDATA[LISTA LIBROS]]></text>
+	<title height="100" splitType="Stretch">
+		<element kind="frame" uuid="f46957ab-b5eb-4092-b6aa-e773dda748bd" mode="Opaque" x="0" y="0" width="442" height="100" backcolor="#000000">
+			<element kind="staticText" uuid="3b368226-76c9-428f-80a0-9216fa74e626" x="0" y="0" width="442" height="66" forecolor="#FFFFFF" fontSize="50.0" bold="false" hTextAlign="Center">
+				<text><![CDATA[Torre de Aketza]]></text>
+			</element>
+			<element kind="staticText" uuid="2b22728e-e563-4d39-936f-084a6f852743" x="80" y="66" width="290" height="29" forecolor="#FFFFFF" fontSize="22.0" bold="false">
+				<text><![CDATA[LISTA LIBROS]]></text>
+			</element>
+		</element>
+		<element kind="image" uuid="cdd28881-4036-4adb-82a3-1b8af69314be" x="442" y="0" width="110" height="99">
+			<expression><![CDATA[$P{IMAGE_PATH}+"icono.png"]]></expression>
 		</element>
 	</title>
 	<detail>
 		<band height="357" splitType="Stretch">
-			<element kind="staticText" uuid="35556c2e-dbac-4950-9a5a-1e7669120de5" x="130" y="0" width="310" height="50" fontSize="30.0" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="staticText" uuid="35556c2e-dbac-4950-9a5a-1e7669120de5" x="130" y="10" width="310" height="50" fontSize="30.0" hTextAlign="Center" vTextAlign="Middle">
 				<text><![CDATA[Detalles del libro]]></text>
 			</element>
-			<element kind="staticText" uuid="dd6dd7de-2110-4cbd-93c0-0bc899f684db" x="-10" y="50" width="90" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+			<element kind="staticText" uuid="dd6dd7de-2110-4cbd-93c0-0bc899f684db" x="-10" y="60" width="90" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
 				<text><![CDATA[Codigo:]]></text>
 			</element>
-			<element kind="textField" uuid="b91921b8-5d40-4f77-974c-aa8ec5a609ad" x="80" y="50" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="b91921b8-5d40-4f77-974c-aa8ec5a609ad" x="80" y="60" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{codigo}]]></expression>
 			</element>
-			<element kind="staticText" uuid="bb9d0425-9c90-4633-a8fd-4bf95a500f38" x="290" y="50" width="90" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+			<element kind="staticText" uuid="bb9d0425-9c90-4633-a8fd-4bf95a500f38" x="290" y="60" width="90" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
 				<text><![CDATA[Titulo:]]></text>
 			</element>
-			<element kind="textField" uuid="6fd23cfb-8c1f-4347-9483-51ecf8bfae19" x="380" y="50" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="6fd23cfb-8c1f-4347-9483-51ecf8bfae19" x="380" y="60" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{titulo}]]></expression>
 			</element>
-			<element kind="staticText" uuid="facdf2c0-a2af-4311-863e-fee94c30740e" x="290" y="80" width="90" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+			<element kind="staticText" uuid="facdf2c0-a2af-4311-863e-fee94c30740e" x="290" y="90" width="90" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
 				<text><![CDATA[Autor:]]></text>
 			</element>
-			<element kind="textField" uuid="0b2ba357-be7c-42bd-92c2-d0618b1525d8" x="380" y="80" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="0b2ba357-be7c-42bd-92c2-d0618b1525d8" x="380" y="90" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{autor}]]></expression>
 			</element>
-			<element kind="staticText" uuid="94345db4-57cc-4b21-879b-5f2995b3ca0b" x="-10" y="80" width="95" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+			<element kind="staticText" uuid="94345db4-57cc-4b21-879b-5f2995b3ca0b" x="-10" y="90" width="95" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
 				<text><![CDATA[Editorial:]]></text>
 			</element>
-			<element kind="textField" uuid="3c8879cd-5d3a-46b6-b6bc-3e4c9dda95e7" x="80" y="80" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="3c8879cd-5d3a-46b6-b6bc-3e4c9dda95e7" x="80" y="90" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{editorial}]]></expression>
 			</element>
-			<element kind="staticText" uuid="40d962fd-75ac-4b27-abbc-96acba8b5837" x="-5" y="110" width="90" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
+			<element kind="staticText" uuid="40d962fd-75ac-4b27-abbc-96acba8b5837" x="-5" y="120" width="90" height="30" fontSize="16.0" hTextAlign="Right" vTextAlign="Middle">
 				<text><![CDATA[Estado:]]></text>
 			</element>
-			<element kind="textField" uuid="5dcea285-6552-4475-9f59-f618a73557ca" x="80" y="110" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="5dcea285-6552-4475-9f59-f618a73557ca" x="80" y="120" width="120" height="30" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{estado}]]></expression>
 			</element>
-			<element kind="staticText" uuid="e507bab3-51c2-48ba-a704-46d50d8719ae" x="10" y="140" width="510" height="50" fontSize="30.0" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="staticText" uuid="e507bab3-51c2-48ba-a704-46d50d8719ae" x="10" y="150" width="510" height="50" fontSize="30.0" hTextAlign="Center" vTextAlign="Middle">
 				<text><![CDATA[Detalles de los prestamos del libro]]></text>
 			</element>
-			<element kind="subreport" uuid="5260ebfb-f052-4a0a-88ab-bb4cf1b788d0" x="-21" y="190" width="510" height="120">
+			<element kind="subreport" uuid="5260ebfb-f052-4a0a-88ab-bb4cf1b788d0" x="-21" y="200" width="510" height="120">
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<expression><![CDATA[$P{Resource_Path}+"subreportListaLibros.jasper"]]></expression>
 				<parameter name="CodigoLibro">
@@ -88,14 +97,14 @@ FROM libros.`Libro`]]></query>
 		</band>
 	</detail>
 	<pageFooter height="38" splitType="Stretch">
-		<element kind="frame" uuid="ea0c0ee8-4e58-4069-b3a1-544cdf0c2a90" mode="Transparent" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF">
-			<element kind="textField" uuid="58b544d1-3962-45b2-bd32-888d664502af" x="533" y="0" width="40" height="20" forecolor="#736343" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle">
+		<element kind="frame" uuid="40fff65c-cd7d-44ce-a26f-c3231009bf85" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#050505">
+			<element kind="textField" uuid="f6bd4be3-ffea-4eeb-85a4-00b3873355af" x="533" y="0" width="40" height="20" forecolor="#FFFFFF" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle">
 				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
 			</element>
-			<element kind="textField" uuid="fcc57964-73f1-41a8-8b7b-1f8d6231d69c" x="453" y="0" width="80" height="20" forecolor="#736343" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle">
+			<element kind="textField" uuid="097fc5b7-b358-44b3-9b8e-865d63849b5c" x="453" y="0" width="80" height="20" forecolor="#FFFFFF" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle">
 				<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
 			</element>
-			<element kind="textField" uuid="34a97c16-f0ae-4c41-ba84-f575dcdb6dc2" x="22" y="1" width="197" height="20" forecolor="#736343" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle">
+			<element kind="textField" uuid="e9789b2a-bcf8-441b-8cb4-9516c66ccc47" x="22" y="1" width="197" height="20" forecolor="#FFFFFF" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle">
 				<expression><![CDATA[new java.util.Date()]]></expression>
 			</element>
 		</element>
