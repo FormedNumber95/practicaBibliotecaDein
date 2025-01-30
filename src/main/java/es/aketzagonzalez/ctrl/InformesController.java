@@ -1,6 +1,7 @@
 package es.aketzagonzalez.ctrl;
 
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Locale;
@@ -17,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -27,7 +30,7 @@ import net.sf.jasperreports.view.JasperViewer;
 /**
  * The Class InformesController.
  * @author Aketza
- * @version 1.1
+ * @version 1.2
  */
 public class InformesController {
 
@@ -54,6 +57,10 @@ public class InformesController {
     /** The btn libros. */
     @FXML
     private Button btnLibros;
+    
+    /** The menu item ver manual usuario. */
+    @FXML
+    private MenuItem menuItemVerManualUsuario;
 
     /** The btn lista libros. */
     @FXML
@@ -74,8 +81,8 @@ public class InformesController {
     /**
      * Generar informe calculos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void generarInformeCalculos(ActionEvent event) {
@@ -98,8 +105,8 @@ public class InformesController {
     /**
      * Generar lista libros.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void generarListaLibros(ActionEvent event) {
@@ -123,8 +130,8 @@ public class InformesController {
     /**
      * Mostar graficos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void mostarGraficos(ActionEvent event) {
@@ -148,8 +155,8 @@ public class InformesController {
     /**
      * Ver alumnos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verAlumnos(ActionEvent event) {
@@ -163,8 +170,8 @@ public class InformesController {
     /**
      * Ver quien ha desarrollado la app.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verDesarrollador(ActionEvent event) {
@@ -173,12 +180,36 @@ public class InformesController {
     	al.setContentText("Desarrollador: Aketza González Rey");
     	al.showAndWait();
     }
+    
+    /**
+     * Ver manual usuario.
+     *
+     * @param event the event
+     */
+    @FXML
+    void verManualUsuario(ActionEvent event) {
+    	WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+
+        // Obtener la URL del archivo HTML desde resources
+        URL resource = getClass().getResource("/html/manualUsuario.html");
+        
+        if (resource != null) {
+            // Cargar el archivo HTML en el WebView
+            webEngine.load(resource.toExternalForm());
+        } else {
+        	Alert al=new Alert(AlertType.ERROR);
+        	al.setHeaderText(null);
+        	al.setContentText("No se pudo encontrar el archivo HTML.");
+        	al.showAndWait();
+        }
+    }
 
     /**
      * Ver devoluciones.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verDevoluciones(ActionEvent event) {
@@ -192,8 +223,8 @@ public class InformesController {
     /**
      * Ver informes, vacio pero necesario para evitar errores.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verInformes(ActionEvent event) {
@@ -203,8 +234,8 @@ public class InformesController {
     /**
      * Ver libros.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verLibros(ActionEvent event) {
@@ -218,8 +249,8 @@ public class InformesController {
     /**
      * Ver prestamos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verPrestamos(ActionEvent event) {

@@ -1,6 +1,7 @@
 package es.aketzagonzalez.ctrl;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Date;
 import java.util.Locale;
 import java.util.Properties;
@@ -25,12 +26,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 /**
  * The Class DevolucionesController.
  * @author Aketza
- * @version 1.1
+ * @version 1.2
  */
 public class DevolucionesController {
 
@@ -90,6 +93,10 @@ public class DevolucionesController {
     @FXML
     private TextField txtFiltro;
     
+    /** The menu item ver manual usuario. */
+    @FXML
+    private MenuItem menuItemVerManualUsuario;
+    
     /** The filtro. */
     private FilteredList<ModeloPrestamo> filtro;
     
@@ -102,8 +109,8 @@ public class DevolucionesController {
     /**
      * Accion filtrar.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void accionFiltrar(ActionEvent event) {
@@ -118,8 +125,8 @@ public class DevolucionesController {
     /**
      * Devolver libro.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void devolverLibro(ActionEvent event) {
@@ -158,8 +165,8 @@ public class DevolucionesController {
     /**
      * Ver alumnos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verAlumnos(ActionEvent event) {
@@ -173,8 +180,8 @@ public class DevolucionesController {
     /**
      * Ver quien ha desarrollado la app.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verDesarrollador(ActionEvent event) {
@@ -183,12 +190,36 @@ public class DevolucionesController {
     	al.setContentText("Desarrollador: Aketza González Rey");
     	al.showAndWait();
     }
+    
+    /**
+     * Ver manual usuario.
+     *
+     * @param event the event
+     */
+    @FXML
+    void verManualUsuario(ActionEvent event) {
+    	WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+
+        // Obtener la URL del archivo HTML desde resources
+        URL resource = getClass().getResource("/html/manualUsuario.html");
+        
+        if (resource != null) {
+            // Cargar el archivo HTML en el WebView
+            webEngine.load(resource.toExternalForm());
+        } else {
+        	Alert al=new Alert(AlertType.ERROR);
+        	al.setHeaderText(null);
+        	al.setContentText("No se pudo encontrar el archivo HTML.");
+        	al.showAndWait();
+        }
+    }
 
     /**
      * Ver devoluciones, vacio pero necesario para evitar errores.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verDevoluciones(ActionEvent event) {
@@ -198,8 +229,8 @@ public class DevolucionesController {
     /**
      * Ver informes.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verInformes(ActionEvent event) {
@@ -213,8 +244,8 @@ public class DevolucionesController {
     /**
      * Ver libros.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verLibros(ActionEvent event) {
@@ -228,8 +259,8 @@ public class DevolucionesController {
     /**
      * Ver prestamos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verPrestamos(ActionEvent event) {
@@ -259,8 +290,8 @@ public class DevolucionesController {
     /**
      * Gets the s.
      *
-     * @return the s
      * @author Aketza
+     * @return the s
      */
     public static Stage getS() {
 		return s;

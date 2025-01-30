@@ -1,6 +1,7 @@
 package es.aketzagonzalez.ctrl;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Date;
 import java.util.Locale;
 import java.util.Properties;
@@ -27,12 +28,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 /**
  * The Class PrestamosController.
  * @author Aketza
- * @version 1.1
+ * @version 1.2
  */
 public class PrestamosController {
 
@@ -75,6 +78,10 @@ public class PrestamosController {
     /** The col fecha prestamo. */
     @FXML
     private TableColumn<ModeloHistoricoPrestamos, Date> colFechaPrestamo;
+    
+    /** The menu item ver manual usuario. */
+    @FXML
+    private MenuItem menuItemVerManualUsuario;
 
     /** The col id prestamo. */
     @FXML
@@ -128,8 +135,8 @@ public class PrestamosController {
     /**
      * Accion filtrar.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void accionFiltrar(ActionEvent event) {
@@ -152,8 +159,8 @@ public class PrestamosController {
     /**
      * Aniadir prestamo.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void aniadirPrestamo(ActionEvent event) {
@@ -183,8 +190,8 @@ public class PrestamosController {
     /**
      * Ver alumnos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verAlumnos(ActionEvent event) {
@@ -198,8 +205,8 @@ public class PrestamosController {
     /**
      * Ver quien ha desarrollado la app.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verDesarrollador(ActionEvent event) {
@@ -208,12 +215,36 @@ public class PrestamosController {
     	al.setContentText("Desarrollador: Aketza González Rey");
     	al.showAndWait();
     }
+    
+    /**
+     * Ver manual usuario.
+     *
+     * @param event the event
+     */
+    @FXML
+    void verManualUsuario(ActionEvent event) {
+    	WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+
+        // Obtener la URL del archivo HTML desde resources
+        URL resource = getClass().getResource("/html/manualUsuario.html");
+        
+        if (resource != null) {
+            // Cargar el archivo HTML en el WebView
+            webEngine.load(resource.toExternalForm());
+        } else {
+        	Alert al=new Alert(AlertType.ERROR);
+        	al.setHeaderText(null);
+        	al.setContentText("No se pudo encontrar el archivo HTML.");
+        	al.showAndWait();
+        }
+    }
 
     /**
      * Ver devoluciones.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verDevoluciones(ActionEvent event) {
@@ -227,8 +258,8 @@ public class PrestamosController {
     /**
      * Ver informes.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verInformes(ActionEvent event) {
@@ -242,8 +273,8 @@ public class PrestamosController {
     /**
      * Ver libros.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verLibros(ActionEvent event) {
@@ -257,8 +288,8 @@ public class PrestamosController {
     /**
      * Ver prestamos, vacio pero necesario para evitar errores.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verPrestamos(ActionEvent event) {
@@ -268,8 +299,8 @@ public class PrestamosController {
     /**
      * Ver devueltos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verDevueltos(ActionEvent event) {
@@ -283,8 +314,8 @@ public class PrestamosController {
     /**
      * Ver pendientes.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verPendientes(ActionEvent event) {
@@ -298,8 +329,8 @@ public class PrestamosController {
     /**
      * Ver todos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verTodos(ActionEvent event) {
@@ -330,8 +361,8 @@ public class PrestamosController {
     /**
      * Gets the s.
      *
-     * @return the s
      * @author Aketza
+     * @return the s
      */
     public static Stage getS() {
 		return s;
