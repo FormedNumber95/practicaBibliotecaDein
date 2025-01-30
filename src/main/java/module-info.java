@@ -5,6 +5,7 @@ module es.aketzagonzalez {
 	requires java.sql;
 	requires javafx.graphics;
 	requires javafx.base;
+	requires javafx.web;
 	requires java.desktop;
 	requires net.sf.jasperreports.core;
     opens es.aketzagonzalez.ctrl to javafx.fxml;

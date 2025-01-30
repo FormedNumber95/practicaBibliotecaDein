@@ -1,6 +1,40 @@
 Manifest-Version: 1.0
-Built-By: Aketza
-Build-Jdk: 17.0.12
-Main-Class: es.aketzagonzalez.practicaBibliotecaDein.MainApp
+Build-Jdk-Spec: 17
+Class-Path: libs/maven-assembly-plugin-3.7.1.jar libs/maven-resolver-uti
+ l-1.4.1.jar libs/maven-resolver-api-1.4.1.jar libs/maven-common-artifac
+ t-filters-3.3.2.jar libs/slf4j-api-1.7.36.jar libs/plexus-interpolation
+ -1.27.jar libs/commons-io-2.15.1.jar libs/maven-filtering-3.3.2.jar lib
+ s/javax.inject-1.jar libs/plexus-build-api-0.0.7.jar libs/commons-lang3
+ -3.14.0.jar libs/plexus-io-3.4.2.jar libs/plexus-archiver-4.9.2.jar lib
+ s/commons-compress-1.26.1.jar libs/commons-codec-1.16.1.jar libs/snappy
+ -0.4.jar libs/xz-1.9.jar libs/zstd-jni-1.5.5-11.jar libs/maven-archiver
+ -3.6.1.jar libs/plexus-utils-4.0.0.jar libs/plexus-xml-3.0.0.jar libs/j
+ avafx-fxml-22.jar libs/javafx-fxml-22-win.jar libs/javafx-media-22.jar 
+ libs/javafx-media-22-win.jar libs/mariadb-java-client-3.4.1.jar libs/wa
+ ffle-jna-3.3.0.jar libs/jna-5.13.0.jar libs/jna-platform-5.13.0.jar lib
+ s/jcl-over-slf4j-2.0.7.jar libs/caffeine-2.9.3.jar libs/error_prone_ann
+ otations-2.10.0.jar libs/checker-qual-3.32.0.jar libs/jasperreports-7.0
+ .1.jar libs/commons-logging-1.3.0.jar libs/commons-collections4-4.4.jar
+  libs/jackson-core-2.17.1.jar libs/jackson-annotations-2.17.1.jar libs/
+ jackson-databind-2.17.1.jar libs/jackson-dataformat-xml-2.17.1.jar libs
+ /stax2-api-4.2.2.jar libs/woodstox-core-6.6.2.jar libs/batik-anim-1.17.
+ jar libs/batik-ext-1.17.jar libs/batik-parser-1.17.jar libs/batik-share
+ d-resources-1.17.jar libs/batik-bridge-1.17.jar libs/batik-script-1.17.
+ jar libs/batik-xml-1.17.jar libs/xmlgraphics-commons-2.9.jar libs/batik
+ -dom-1.17.jar libs/batik-svg-dom-1.17.jar libs/batik-awt-util-1.17.jar 
+ libs/batik-gvt-1.17.jar libs/batik-util-1.17.jar libs/batik-i18n-1.17.j
+ ar libs/batik-constants-1.17.jar libs/batik-css-1.17.jar libs/xml-apis-
+ ext-1.3.04.jar libs/commons-beanutils-1.9.4.jar libs/commons-collection
+ s-3.2.2.jar libs/jasperreports-chart-themes-7.0.1.jar libs/jfreechart-1
+ .5.4.jar libs/castor-core-1.4.1.jar libs/jasperreports-charts-7.0.1.jar
+  libs/batik-svggen-1.17.jar libs/jasperreports-spring-7.0.1.jar libs/sp
+ ring-core-5.3.27.jar libs/spring-jcl-5.3.27.jar libs/spring-beans-5.3.2
+ 7.jar libs/jasperreports-pdf-7.0.1.jar libs/openpdf-1.3.32.jar libs/xmp
+ core-6.1.11.jar libs/jasperreports-jdt-7.0.1.jar libs/ecj-3.21.0.jar li
+ bs/javafx-controls-22.jar libs/javafx-controls-22-win.jar libs/javafx-b
+ ase-22.jar libs/javafx-base-22-win.jar libs/javafx-graphics-22.jar libs
+ /javafx-graphics-22-win.jar libs/javafx-web-21.0.4.jar libs/javafx-web-
+ 21.0.4-win.jar
+Main-Class: es.aketzagonzalez.practicaBibliotecaDein.Lanzador
 Created-By: Maven Integration for Eclipse
 

@@ -52,6 +52,7 @@
             <Menu fx:id="menAyuda" mnemonicParsing="false" text="%label.ayuda">
                <items>
                   <MenuItem fx:id="menuItemVerDesarrolador" mnemonicParsing="false" onAction="#verDesarrollador" text="%label.acercaDe" />
+                  <MenuItem fx:id="menuItemVerManualUsuario" mnemonicParsing="false" onAction="#verManualUsuario" text="%label.manualUsuario" />
                </items></Menu>
          </menus>
     </MenuBar>

@@ -31,12 +31,14 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 /**
  * The Class LibrosController.
  * @author Aketza
- * @version 1.1
+ * @version 1.2
  */
 public class LibrosController {
 
@@ -107,6 +109,10 @@ public class LibrosController {
     /** The men ayuda. */
     @FXML
     private Menu menAyuda;
+    
+    /** The menu item ver manual usuario. */
+    @FXML
+    private MenuItem menuItemVerManualUsuario;
 
     /** The txt filtro. */
     @FXML
@@ -131,8 +137,8 @@ public class LibrosController {
     /**
      * Accion filtrar.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void accionFiltrar(ActionEvent event) {
@@ -147,8 +153,8 @@ public class LibrosController {
     /**
      * Aniadir libro.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void aniadirLibro(ActionEvent event) {
@@ -178,8 +184,8 @@ public class LibrosController {
     /**
      * Dar de baja.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void darDeBaja(ActionEvent event) {
@@ -196,8 +202,8 @@ public class LibrosController {
     /**
      * Modificar libro.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void modificarLibro(ActionEvent event) {
@@ -236,8 +242,8 @@ public class LibrosController {
     /**
      * Ver alumnos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verAlumnos(ActionEvent event) {
@@ -251,8 +257,8 @@ public class LibrosController {
     /**
      * Ver quien ha desarrollado la app.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verDesarrollador(ActionEvent event) {
@@ -261,12 +267,36 @@ public class LibrosController {
     	al.setContentText("Desarrollador: Aketza González Rey");
     	al.showAndWait();
     }
+    
+    /**
+     * Ver manual usuario.
+     *
+     * @param event the event
+     */
+    @FXML
+    void verManualUsuario(ActionEvent event) {
+    	WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+
+        // Obtener la URL del archivo HTML desde resources
+        URL resource = getClass().getResource("/html/manualUsuario.html");
+        
+        if (resource != null) {
+            // Cargar el archivo HTML en el WebView
+            webEngine.load(resource.toExternalForm());
+        } else {
+        	Alert al=new Alert(AlertType.ERROR);
+        	al.setHeaderText(null);
+        	al.setContentText("No se pudo encontrar el archivo HTML.");
+        	al.showAndWait();
+        }
+    }
 
     /**
      * Ver devoluciones.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verDevoluciones(ActionEvent event) {
@@ -280,8 +310,8 @@ public class LibrosController {
     /**
      * Ver informes.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verInformes(ActionEvent event) {
@@ -295,8 +325,8 @@ public class LibrosController {
     /**
      * Ver libros, vacio pero necesario para evitar errores.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verLibros(ActionEvent event) {
@@ -306,8 +336,8 @@ public class LibrosController {
     /**
      * Ver prestamos.
      *
-     * @param event the event
      * @author Aketza
+     * @param event the event
      */
     @FXML
     void verPrestamos(ActionEvent event) {
@@ -342,10 +372,10 @@ public class LibrosController {
     /**
      * Gets the imagen input stream.
      *
+     * @author Aketza
      * @param url the url
      * @return the imagen input stream
      * @throws IOException Signals that an I/O exception has occurred.
-     * @author Aketza
      */
     public static InputStream getImagenInputStream(URL url) throws IOException {
         if (url == null) {
@@ -357,9 +387,9 @@ public class LibrosController {
     /**
      * Convertir bytes A image view.
      *
+     * @author Aketza
      * @param fotoStream the foto stream
      * @return the image view
-     * @author Aketza
      */
     private ImageView convertirBytesAImageView(InputStream fotoStream) {
         if (fotoStream == null) {
@@ -375,8 +405,8 @@ public class LibrosController {
     /**
      * Gets the s.
      *
-     * @return the s
      * @author Aketza
+     * @return the s
      */
     public static Stage getS() {
 		return s;
@@ -385,8 +415,8 @@ public class LibrosController {
     /**
      * Checks if is es aniadir.
      *
-     * @return true, if is es aniadir
      * @author Aketza
+     * @return true, if is es aniadir
      */
     public static boolean isEsAniadir() {
 		return esAniadir;
@@ -395,8 +425,8 @@ public class LibrosController {
     /**
      * Sets the lista todas.
      *
-     * @param listaTodas the new lista todas
      * @author Aketza
+     * @param listaTodas the new lista todas
      */
     public static void setListaTodas(ObservableList<ModeloLibro> listaTodas) {
 		LibrosController.listaTodas = listaTodas;

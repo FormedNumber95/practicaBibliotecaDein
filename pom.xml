@@ -11,10 +11,16 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>es.aketzagonzalez.practicaBibliotecaDein.MainApp</mainClass>
+        <mainClass>es.aketzagonzalez.practicaBibliotecaDein.Lanzador</mainClass>
     </properties>
 
     <dependencies>
+		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
+		<dependency>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-assembly-plugin</artifactId>
+		    <version>3.7.1</version>
+		</dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
@@ -58,28 +64,89 @@
             <artifactId>jasperreports-jdt</artifactId>
             <version>7.0.1</version>
         </dependency>
+        <dependency>
+		    <groupId>org.openjfx</groupId>
+		    <artifactId>javafx-controls</artifactId>
+		    <version>22</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.openjfx</groupId>
+		    <artifactId>javafx-base</artifactId>
+		    <version>22</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.openjfx</groupId>
+		    <artifactId>javafx-graphics</artifactId>
+		    <version>22</version>
+		</dependency>
+		<dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>21.0.4</version>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
-            <!-- adds file to let you run program outside of IDE -->
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
+			<plugin>
+		        <artifactId>maven-assembly-plugin</artifactId>
+		        <version>3.7.1</version>
+		        <configuration>
+					<archive>
+	                    <manifest>
+	                        <mainClass>es.aketzagonzalez.practicaBibliotecaDein.Lanzador</mainClass>
+	                    </manifest>
+	                </archive>
+		          	<descriptorRefs>
+		            	<descriptorRef>jar-with-dependencies</descriptorRef>
+		          	</descriptorRefs>
+		        </configuration>
+		        <executions>
+		          <execution>
+		            <id>make-assembly</id> <!-- this is used for inheritance merges -->
+		            <phase>package</phase> <!-- bind to the packaging phase -->
+		            <goals>
+		              <goal>single</goal>
+		            </goals>
+		          </execution>
+		        </executions>
+		      </plugin>
+		      <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.4.1</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>libs/</classpathPrefix>
+							<mainClass>es.aketzagonzalez.practicaBibliotecaDein.Lanzador</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			  </plugin>
+			  <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <!-- Default configuration for running with: mvn clean javafx:run -->
+                        <id>default-cli</id>
+                        <phase>validate</phase>
                         <configuration>
-                            <tasks>
-                                <echo file="${project.build.directory}/runme.bat">start jlink-image\bin\javaw -jar modules\${project.artifactId}-${project.version}.jar</echo>
-                            </tasks>
+                            <mainClass>es.aketzagonzalez.practicaBibliotecaDein.Lanzador</mainClass>
+                            <launcher>app</launcher>
+                            <jlinkZipName>app</jlinkZipName>
+                            <jlinkImageName>app</jlinkImageName>
+                            <noManPages>true</noManPages>
+                            <stripDebug>true</stripDebug>
+                            <noHeaderFiles>true</noHeaderFiles>
                         </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>
-
             <!-- sets up the version of Java you are running -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -96,52 +163,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
-            <!-- Adds the mainClass to the jar so it will run outside -->
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>${mainClass}</mainClass>
-                        </manifest>
-                    </archive>
-                    <outputDirectory>${project.build.directory}/modules</outputDirectory>
-                </configuration>
-            </plugin>
-
-            <!-- Makes the jLink setup so you can give it to your friends  -->
-            <plugin>
-                <groupId>org.moditect</groupId>
-                <artifactId>moditect-maven-plugin</artifactId>
-                <version>1.0.0.Beta2</version>
-                <executions>
-                    <execution>
-                        <id>create-runtime-image</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>create-runtime-image</goal>
-                        </goals>
-                        <configuration>
-                            <modulePath>
-                                <path>${project.build.directory}/modules</path>
-                            </modulePath>
-                            <modules>
-                                <module>${project.groupId}</module>
-                            </modules>
-                            <launcher>
-                                <name>${project.groupId}</name>
-
-                            </launcher>
-                            <compression>2</compression>
-                            <stripDebug>true</stripDebug>
-                            <outputDirectory>${project.build.directory}/jlink-image</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- Copies the depend FX files to your program  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -154,8 +175,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/modules</outputDirectory>
-                            <includeScope>runtime</includeScope>
+                            <outputDirectory>${project.build.directory}/libs</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

@@ -1,6 +1,7 @@
 package es.aketzagonzalez.ctrl;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.StackPane;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -25,11 +27,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 /**
  * The Class AlumnosController.
  * @author Aketza
- * @version 1.1
+ * @version 1.2
  */
 public class AlumnosController {
 
@@ -88,6 +92,10 @@ public class AlumnosController {
     /** The tbl alumnos. */
     @FXML
     private TableView<ModeloAlumno> tblAlumnos;
+    
+    /** The menu item ver manual usuario. */
+    @FXML
+    private MenuItem menuItemVerManualUsuario;
     
     /** The filtro. */
     private FilteredList<ModeloAlumno> filtro;
@@ -214,6 +222,43 @@ public class AlumnosController {
     	al.setHeaderText(null);
     	al.setContentText("Desarrollador: Aketza González Rey");
     	al.showAndWait();
+    }
+    
+    /**
+     * Ver manual usuario.
+     *
+     * @param event the event
+     */
+    @FXML
+    void verManualUsuario(ActionEvent event) {
+    	WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+
+        // Obtener la URL del archivo HTML desde resources
+        URL resource = getClass().getResource("/html/manualUsuario.html");
+        
+        if (resource != null) {
+            // Cargar el archivo HTML en el WebView
+            webEngine.load(resource.toExternalForm());
+        } else {
+        	Alert al=new Alert(AlertType.ERROR);
+        	al.setHeaderText(null);
+        	al.setContentText("No se pudo encontrar el archivo HTML.");
+        	al.showAndWait();
+        }
+        
+        StackPane root = new StackPane();
+        root.getChildren().add(webView);
+
+        s=new Stage();
+        Scene scene = new Scene(root, 800, 600);
+
+        // Configurar el escenario
+        s.setResizable(false);
+        s.setScene(scene);
+        s.initOwner(es.aketzagonzalez.practicaBibliotecaDein.Lanzador.getStage());
+        s.initModality(javafx.stage.Modality.WINDOW_MODAL);
+        s.showAndWait();
     }
 
     /**
